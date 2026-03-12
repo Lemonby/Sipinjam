@@ -1,69 +1,64 @@
-# CodeIgniter 4 Application Starter
+# Sipinjam
 
-## What is CodeIgniter?
+Sebuah platform manajemen peminjaman buku perpustakaan modern yang dibangun dengan CodeIgniter 4 dan Tailwind CSS. Proyek ini dirancang untuk mempermudah proses administrasi perpustakaan dan memberikan pengalaman peminjaman yang seamless bagi anggota (mahasiswa).
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## 🚀 Fitur Utama (User Side)
+Smart Catalog: Eksplorasi koleksi buku dengan fitur pencarian dan filter kategori yang cepat.
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+Real-time Monitoring: Pantau buku yang sedang dipinjam dengan indikator countdown jatuh tempo otomatis.
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+Self-Service Extension: Fitur perpanjangan durasi pinjam secara mandiri (sesuai kebijakan).
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+Waitlist Reservation: Sistem reservasi (booking) otomatis jika stok buku sedang kosong.
 
-## Installation & updates
+Notification System: Notifikasi pengingat pengembalian dan info ketersediaan buku reservasi.
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+## 🛠️ Tech Stack
+Backend: PHP 8.x (Framework CodeIgniter 4)
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+Frontend: Tailwind CSS & Vanilla JavaScript
 
-## Setup
+Database: MySQL / MariaDB
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+Tools: Composer, GitHub
 
-## Important Change with index.php
+## 📂 Struktur Proyek (MVC)
+Proyek ini mengikuti standar arsitektur Model-View-Controller (MVC) dari CodeIgniter 4 untuk memastikan kode yang bersih dan mudah dikelola (clean code).
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+Plaintext
+├── app/
+│   ├── Controllers/  # Logika bisnis aplikasi
+│   ├── Models/       # Interaksi dengan database
+│   └── Views/        # Tampilan (User & Admin)
+├── public/           # Aset publik (CSS, JS, Images)
+└── writable/         # Folder cache dan logs
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+## ⚙️ Cara Instalasi
+Clone repositori ini:
 
-**Please** read the user guide for a better explanation of how CI4 works!
+Bash
+git clone https://github.com/username/repo-name.git
+Instal dependensi melalui Composer:
 
-## Repository Management
+Bash
+composer install
+Salin file env ke .env dan sesuaikan konfigurasi database:
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+Bash
+cp env .env
+Jalankan migrasi database:
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+Bash
+php spark migrate
+Jalankan server lokal:
 
-## Server Requirements
+Bash
+php spark serve
+## 🎨 Palet Warna & Desain
+Website ini menggunakan skema warna profesional:
 
-PHP version 8.2 or higher is required, with the following extensions installed:
+Primary Blue: #237FEA
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+Background: #FFFFFF
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+Typography: Inter / Plus Jakarta Sans
