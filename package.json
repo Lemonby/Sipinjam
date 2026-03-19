@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "serve": "php spark serve",
+    "build:css": "npx @tailwindcss/cli -i ./public/css/input.css -o ./public/css/style.css",
+    "watch:css": "npx @tailwindcss/cli -i ./public/css/input.css -o ./public/css/style.css --watch",
+    "dev": "concurrently \"php spark serve\" \"npm run watch:css\""
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.2.1",
+    "tailwindcss": "^4.2.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
