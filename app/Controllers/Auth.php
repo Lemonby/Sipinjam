@@ -1,0 +1,80 @@
+<?php
+
+namespace App\Controllers;
+
+class Auth extends BaseController
+{
+    /**
+     * Dummy data mahasiswa untuk simulasi login tanpa database.
+     */
+    private array $dummyMahasiswa = [
+        [
+            'nama' => 'Agung Pratama',
+            'nim' => '22011001',
+            'jurusan' => 'Teknik Informatika',
+        ],
+        [
+            'nama' => 'Nadia Putri',
+            'nim' => '22011002',
+            'jurusan' => 'Sistem Informasi',
+        ],
+        [
+            'nama' => 'Raka Maulana',
+            'nim' => '22011003',
+            'jurusan' => 'Teknik Komputer',
+        ],
+    ];
+
+    public function login(): string
+    {
+        return view('Login', [
+            'dummyMahasiswa' => $this->dummyMahasiswa,
+        ]);
+    }
+
+    public function authenticate()
+    {
+        $nama = trim((string) $this->request->getPost('nama_mahasiswa'));
+        $nim = trim((string) $this->request->getPost('nim'));
+        $jurusan = trim((string) $this->request->getPost('jurusan'));
+
+        if ($nama === '' || $nim === '' || $jurusan === '') {
+            return redirect()->back()->withInput()->with('error', 'Semua field wajib diisi.');
+        }
+
+        foreach ($this->dummyMahasiswa as $mahasiswa) {
+            $isMatch = strtolower($mahasiswa['nama']) === strtolower($nama)
+                && $mahasiswa['nim'] === $nim
+                && strtolower($mahasiswa['jurusan']) === strtolower($jurusan);
+
+            if ($isMatch) {
+                session()->set([
+                    'isLoggedIn' => true,
+                    'mahasiswa' => $mahasiswa,
+                ]);
+
+                return redirect()->to('/dashboard');
+            }
+        }
+
+        return redirect()->back()->withInput()->with('error', 'Data tidak cocok dengan akun dummy yang tersedia.');
+    }
+
+    public function dashboard(): string
+    {
+        if (! session()->get('isLoggedIn')) {
+            return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        return view('Dashboard', [
+            'user' => session()->get('mahasiswa'),
+        ]);
+    }
+
+    public function logout()
+    {
+        session()->destroy();
+    
+        return redirect()->to('/login')->with('success', 'Berhasil logout.');
+    }
+}
