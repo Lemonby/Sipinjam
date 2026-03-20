@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Controllers;
+
+class Peminjamanku extends BaseController
+{
+    public function index()
+    {
+        if (!session()->get('isLoggedIn')) {
+            return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
+        }
+
+        return view('Peminjamanku', [
+            'user' => session()->get('mahasiswa'),
+        ]);
+    }
+}

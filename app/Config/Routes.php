@@ -9,12 +9,12 @@ $routes->get('/', 'Home::index');
 
 $routes->get('/login', 'Auth::login');
 $routes->post('/login', 'Auth::authenticate');
+
 $routes->get('/dashboard', 'Auth::dashboard');
 $routes->get('/logout', 'Auth::logout');
+$routes->get('/katalog', 'Katalog::index');
+$routes->get('/peminjamanku', 'Peminjamanku::index');
+$routes->get('/reservasi', 'Reservasi::index');
+$routes->get('/riwayat-denda', 'Denda::index');
 
-
-$routes->get('/about', 'Pages::about');
-$routes->get('/contact', 'Pages::contact'); 
-$routes->get('/faqs', 'Pages::faqs');
-$routes->get('/news', 'News::index');
 $routes->setAutoRoute(false);
