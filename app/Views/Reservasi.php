@@ -1,4 +1,4 @@
-<?= $this->extends('layout/PageLayoutSipinjam') ?>
+<?= $this->extend('layout/PageLayoutSipinjam') ?>
 
 <?= $this->section('content') ?>
 
@@ -8,7 +8,7 @@
         <h1 class="text-3xl font-bold">Reservasi Saya</h1>
         <p class="text-blue-100 mt-2">Lihat dan kelola reservasi buku Anda.</p>
     </div>
-
+`
     <!-- DAFTAR RESERVASI -->
     <div class="bg-white rounded-2xl p-6 shadow-md">
         <h2 class="text-xl font-bold text-slate-800 mb-6">Buku yang Direservasi</h2>

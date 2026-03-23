@@ -13,8 +13,9 @@ $routes->post('/login', 'Auth::authenticate');
 $routes->get('/dashboard', 'Auth::dashboard');
 $routes->get('/logout', 'Auth::logout');
 $routes->get('/katalog', 'Katalog::index');
-$routes->get('/peminjamanku', 'Peminjamanku::index');
+$routes->get('/peminjamanku', 'PeminjamanKu::index');
 $routes->get('/reservasi', 'Reservasi::index');
 $routes->get('/riwayat-denda', 'Denda::index');
+$routes->get('/pengaturan', 'Pengaturan::index');
 
 $routes->setAutoRoute(false);

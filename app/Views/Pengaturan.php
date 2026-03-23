@@ -1,4 +1,4 @@
-<?= $this->extends('layout/PageLayoutSipinjam') ?>
+<?= $this->extend('layout/PageLayoutSipinjam') ?>
 
 <?= $this->section('content') ?>
 

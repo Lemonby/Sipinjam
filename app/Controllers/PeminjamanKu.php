@@ -10,7 +10,7 @@ class Peminjamanku extends BaseController
             return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        return view('Peminjamanku', [
+        return view('PeminjamanKu', [
             'user' => session()->get('mahasiswa'),
         ]);
     }

@@ -1,4 +1,4 @@
-<?= $this->extends('layout/PageLayoutSipinjam') ?>
+<?= $this->extend('layout/PageLayoutSipinjam') ?>
 
 <?= $this->section('content') ?>
 
@@ -70,5 +70,6 @@
         </div>
     </div>
 </div>
+
 
 <?= $this->endSection() ?>
