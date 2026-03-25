@@ -2,128 +2,118 @@
 
 <?= $this->section('content') ?>
 
-<div? class="p-8">
+<div class="p-8 bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
     <!-- HEADER -->
-    <div class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-2xl p-8 mb-8 shadow-lg">
-        <h1 class="text-3xl font-bold">Rekomendasi Buku</h1>
-        <p class="text-blue-100 mt-2">Kelola semua peminjaman buku Anda di sini.</p>
-    </div>
-
-    <div class="bg-white rounded-2xl p-6 shadow-md mb-8">
-        <h2 class="text-xl font-bold text-slate-800">Rekomendasi untuk Kamu</h2>
-
-        <!-- Search & Filter Bar -->
-        <div class="flex items-center justify-between py-4 border-b border-gray-200">
-            <input type="text" name="search" id="search" placeholder="Cari buku..." class="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
-            <input type="text" name="filter" id="filter" placeholder="Filter..." class="ml-4 rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-
-        <!-- Book Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 pt-6">
-            <!-- Contoh Kartu Buku -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="<?= base_url('images/book-cover-placeholder.png') ?>" alt="Cover Buku" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <p class="text-sm font-medium text-green-600 bg-green-100 rounded px-2 py-1 inline-block mb-1">Tersedia</p>
-                    <h3 class="text-lg font-bold text-slate-800">Judul Buku</h3>
-                    <p class="text-sm text-slate-500 mt-1">Penulis: Nama Penulis</p>
-                    <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition">Pinjam</button>
+    <div class="mb-8">
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-3xl p-10 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-4xl font-bold mb-2">Katalog Buku</h1>
+                    <p class="text-blue-100 text-lg">Jelajahi koleksi lengkap perpustakaan kami</p>
                 </div>
-            </div>
-
-            <!-- Tambahkan kartu buku lainnya di sini -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="<?= base_url('images/book-cover-placeholder.png') ?>" alt="Cover Buku" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <p class="text-sm font-medium text-green-600 bg-green-100 rounded px-2 py-1 inline-block mb-1">Tersedia</p>
-                    <h3 class="text-lg font-bold text-slate-800">Judul Buku</h3>
-                    <p class="text-sm text-slate-500 mt-1">Penulis: Nama Penulis</p>
-                    <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition">Pinjam</button>
-                </div>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="<?= base_url('images/book-cover-placeholder.png') ?>" alt="Cover Buku" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <p class="text-sm font-medium text-green-600 bg-green-100 rounded px-2 py-1 inline-block mb-1">Tersedia</p>
-                    <h3 class="text-lg font-bold text-slate-800">Judul Buku</h3>
-                    <p class="text-sm text-slate-500 mt-1">Penulis: Nama Penulis</p>
-                    <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition">Pinjam</button>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="<?= base_url('images/book-cover-placeholder.png') ?>" alt="Cover Buku" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <p class="text-sm font-medium text-green-600 bg-green-100 rounded px-2 py-1 inline-block mb-1">Tersedia</p>
-                    <h3 class="text-lg font-bold text-slate-800">Judul Buku</h3>
-                    <p class="text-sm text-slate-500 mt-1">Penulis: Nama Penulis</p>
-                    <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition">Pinjam</button>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="<?= base_url('images/book-cover-placeholder.png') ?>" alt="Cover Buku" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <p class="text-sm font-medium text-green-600 bg-green-100 rounded px-2 py-1 inline-block mb-1">Tersedia</p>
-                    <h3 class="text-lg font-bold text-slate-800">Judul Buku</h3>
-                    <p class="text-sm text-slate-500 mt-1">Penulis: Nama Penulis</p>
-                    <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition">Pinjam</button>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="<?= base_url('images/book-cover-placeholder.png') ?>" alt="Cover Buku" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <p class="text-sm font-medium text-green-600 bg-green-100 rounded px-2 py-1 inline-block mb-1">Tersedia</p>
-                    <h3 class="text-lg font-bold text-slate-800">Judul Buku</h3>
-                    <p class="text-sm text-slate-500 mt-1">Penulis: Nama Penulis</p>
-                    <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition">Pinjam</button>
-                </div>
-            </div>
-
-            <!-- Tambahkan kartu buku lainnya di sini -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="<?= base_url('images/book-cover-placeholder.png') ?>" alt="Cover Buku" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <p class="text-sm font-medium text-green-600 bg-green-100 rounded px-2 py-1 inline-block mb-1">Tersedia</p>
-                    <h3 class="text-lg font-bold text-slate-800">Judul Buku</h3>
-                    <p class="text-sm text-slate-500 mt-1">Penulis: Nama Penulis</p>
-                    <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition">Pinjam</button>
-                </div>
-            </div>
-            
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="<?= base_url('images/book-cover-placeholder.png') ?>" alt="Cover Buku" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <p class="text-sm font-medium text-green-600 bg-green-100 rounded px-2 py-1 inline-block mb-1">Tersedia</p>
-                    <h3 class="text-lg font-bold text-slate-800">Judul Buku</h3>
-                    <p class="text-sm text-slate-500 mt-1">Penulis: Nama Penulis</p>
-                    <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition">Pinjam</button>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="<?= base_url('images/book-cover-placeholder.png') ?>" alt="Cover Buku" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <p class="text-sm font-medium text-green-600 bg-green-100 rounded px-2 py-1 inline-block mb-1">Tersedia</p>
-                    <h3 class="text-lg font-bold text-slate-800">Judul Buku</h3>
-                    <p class="text-sm text-slate-500 mt-1">Penulis: Nama Penulis</p>
-                    <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition">Pinjam</button>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                <img src="<?= base_url('images/book-cover-placeholder.png') ?>" alt="Cover Buku" class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <p class="text-sm font-medium text-green-600 bg-green-100 rounded px-2 py-1 inline-block mb-1">Tersedia</p>
-                    <h3 class="text-lg font-bold text-slate-800">Judul Buku</h3>
-                    <p class="text-sm text-slate-500 mt-1">Penulis: Nama Penulis</p>
-                    <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-lg transition">Pinjam</button>
-                </div>
+                <i class="bi bi-book-half text-6xl opacity-20"></i>
             </div>
         </div>
     </div>
-</div?
+
+    <!-- MAIN CONTENT -->
+    <div class="bg-white rounded-3xl p-8 shadow-lg">
+        <!-- SECTION TITLE -->
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-slate-800 mb-2 flex items-center gap-3">
+                Rekomendasi untuk Kamu
+            </h2>
+            <div class="h-1 w-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"></div>
+        </div>
+
+        <!-- SEARCH & FILTER BAR -->
+        <div class="mb-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl border-2 border-blue-300">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="relative">
+                    <i class="bi bi-search absolute left-4 top-3.5 text-gray-400"></i>
+                    <input type="text" name="search" id="search" placeholder="Cari buku berdasarkan judul..." class="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300" />
+                </div>
+                <div class="relative">
+                    <i class="bi bi-funnel absolute left-4 top-3.5 text-gray-400"></i>
+                    <input type="text" name="filter" id="filter" placeholder="Filter berdasarkan penulis..." class="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300" />
+                </div>
+            </div>
+        </div>
+
+        <!-- BOOK GRID -->
+        <?php if (empty($DummyBuku)): ?>
+            <div class="text-center py-16">
+                <i class="bi bi-inbox text-6xl text-gray-300 block mb-4"></i>
+                <h3 class="text-2xl font-semibold text-gray-500 mb-2">Belum Ada Buku</h3>
+                <p class="text-gray-400">Koleksi buku sedang diperbarui. Silakan cek kembali nanti.</p>
+            </div>
+        <?php else: ?>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                <?php foreach ($DummyBuku as $buku): ?>
+                    <div class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-2">
+                        <!-- Cover Image -->
+                        <div class="relative h-56 overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300">
+                            <img src="<?= $buku['cover'] ?>" alt="<?= $buku['judul'] ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                        </div>
+
+                        <!-- Book Info -->
+                        <div class="p-5">
+                            <!-- Status Badge -->
+                            <div class="mb-3">
+                                <?php if ($buku['status'] === 'tersedia'): ?>
+                                    <span class="inline-flex items-center gap-1 bg-green-500 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                                        <i class="bi bi-check-circle"></i>
+                                        Tersedia
+                                    </span>
+                                <?php else: ?>
+                                    <span class="inline-flex items-center gap-1 bg-red-500 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                                        <i class="bi bi-x-circle"></i>
+                                        Tidak Tersedia
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+
+                            <!-- Title -->
+                            <h3 class="font-bold text-slate-800 text-sm mb-1 line-clamp-2 min-h-10">
+                                <?= $buku['judul'] ?>
+                            </h3>
+
+                            <!-- Author -->
+                            <p class="text-xs text-gray-600 mb-4 flex items-center gap-1 line-clamp-1">
+                                <i class="bi bi-person-fill text-gray-400"></i>
+                                <?= $buku['penulis'] ?>
+                            </p>
+
+                            <!-- Button -->
+                            <div class="pt-3 border-t-2 border-gray-100">
+                                <?php if ($buku['status'] === 'tersedia'): ?>
+                                    <a href="<?= base_url('/peminjaman/' . $buku['id']) ?>" class="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-2.5 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg group/btn">
+                                        <i class="bi bi-bag-check-fill group-hover/btn:scale-110 transition-transform"></i>
+                                        <span>Pinjam</span>
+                                    </a>
+                                <?php else: ?>
+                                    <button disabled class="flex items-center justify-center gap-2 w-full bg-gray-300 text-gray-600 font-bold py-2.5 rounded-lg cursor-not-allowed opacity-60">
+                                        <i class="bi bi-lock-fill"></i>
+                                        <span>Tidak Tersedia</span>
+                                    </button>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Footer Info -->
+            <div class="mt-12 text-center">
+                <div class="inline-block bg-blue-50 border-2 border-blue-300 rounded-xl px-6 py-4">
+                    <p class="text-sm text-gray-600">
+                        <i class="bi bi-info-circle text-blue-600 mr-2"></i>
+                        Menampilkan <strong><?= count($DummyBuku) ?></strong> buku dari koleksi perpustakaan kami
+                    </p>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
 
 <?= $this->endSection() ?>

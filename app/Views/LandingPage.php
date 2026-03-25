@@ -19,7 +19,7 @@
   <?php endif; ?>
 
   <!-- section hero -->
-  <div class="bg-blue-500 text-white p-8 rounded-lg text-left max-w-7xl mx-auto mt-8">
+  <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-3xl text-left max-w-7xl mx-auto mt-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
     <span class="inline-flex items-center gap-2 bg-white/20 text-white text-sm font-medium px-4 py-1 rounded-full">
       <i class="bi bi-mortarboard-fill text-sm"></i>
       khusus mahasiswa cerdas
@@ -27,8 +27,8 @@
     <h6 class="font-bold text-4xl max-w-lg capitalize mt-2 mb-8">Akses  Ribuan Pengetahuan dalam satu klik</h6>
     <p class="text-white text-medium max-w-150 mb-8">pinjam buku favoritmu secara online, ambil di perpustakaan tanpa antre, khusus mahasiswa cerdas, gratis dan murah!</p>
     <div class="flex gap-4">
-      <a href="<?= site_url('/login') ?>" class="inline-flex items-center bg-white hover:bg-blue-50 text-blue-500 font-bold py-2 px-4 rounded transition">Pinjam Sekarang</a>
-      <a href="<?= site_url('/login') ?>" class="inline-flex items-center bg-blue-500 hover:bg-white/10 ring-2 text-white font-bold py-2 px-4 rounded transition">Lihat Detail</a>
+      <a href="<?= site_url('/login') ?>" class="inline-flex items-center bg-white hover:bg-blue-50 text-purple-600 font-bold py-2 px-4 rounded transition">Pinjam Sekarang</a>
+      <a href="<?= site_url('/login') ?>" class="inline-flex items-center bg-white/20 hover:bg-white/30 ring-2 ring-white text-white font-bold py-2 px-4 rounded transition">Lihat Detail</a>
     </div>
   </div>
 
@@ -212,7 +212,7 @@
 
   <!-- footer -->
   <footer class="mt-16 overflow-hidden -mx-8 -mb-4">
-    <div class="bg-[#2f80e7] text-white px-6 py-12 md:px-12">
+    <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-12 md:px-12 shadow-lg">
       <div class="text-center max-w-3xl mx-auto">
         <span class="inline-flex items-center gap-2 bg-white/20 text-white text-sm font-medium px-4 py-1 rounded-full">
           <i class="bi bi-rocket-takeoff-fill text-xs"></i>
@@ -222,7 +222,7 @@
         <p class="text-blue-100 mt-4 leading-relaxed">Daftar sekarang untuk mendapatkan kartu anggota digital dan mulai pinjam buku pertamamu hari ini! Gratis untuk semua mahasiswa IT.</p>
 
         <div class="mt-8 flex flex-col sm:flex-row justify-center gap-3">
-          <button class="bg-white text-[#2f80e7] font-semibold px-6 py-3 rounded-md hover:bg-blue-50 transition">Daftar Jadi Anggota Sekarang <i class="bi bi-arrow-right"></i></button>
+          <button class="bg-white text-purple-600 font-semibold px-6 py-3 rounded-md hover:bg-blue-50 transition">Daftar Jadi Anggota Sekarang <i class="bi bi-arrow-right"></i></button>
           <button class="border border-white text-white font-semibold px-6 py-3 rounded-md hover:bg-white/10 transition"><i class="bi bi-question-circle mr-1"></i> Pelajari Lebih Lanjut</button>
         </div>
       </div>

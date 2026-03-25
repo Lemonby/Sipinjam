@@ -4,24 +4,26 @@
 
 <div class="p-8">
     <!-- HEADER GREETING -->
-    <div class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-2xl p-8 mb-8 shadow-lg">
-        <p class="inline-block bg-white/20 px-3 py-1 rounded-full text-sm font-medium mb-2">
-            <i class="bi bi-hand-thumbs-up"></i> Selamat datang kembali.
-        </p>
-        <h1 class="text-3xl font-bold">Halo, <?= esc($user['nama']) ?>! 👋</h1>
-        <p class="text-blue-100 mt-2">Berikut adalah ringkasan aktivitas perpustakaan kamu hari ini.</p>
-    </div>
+    <div class="mb-8">
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+            <p class="inline-block bg-white/20 px-3 py-1 rounded-full text-sm font-medium mb-2">
+                <i class="bi bi-hand-thumbs-up"></i> Selamat datang kembali.
+            </p>
+            <h1 class="text-3xl font-bold">Halo, <?= esc($user['nama']) ?>! 👋</h1>
+            <p class="text-blue-100 mt-2">Berikut adalah ringkasan aktivitas perpustakaan kamu hari ini.</p>
+        </div>
+    </div>    
 
     <!-- STATISTIK CARDS -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div class="bg-white rounded-2xl p-6 shadow-md border-l-4 border-blue-500">
+        <div class="bg-white rounded-2xl p-6 shadow-md border-l-4 border-blue-600">
             <p class="text-gray-600 text-sm font-medium">Buku Dipinjam</p>
             <h3 class="text-4xl font-bold text-blue-600 mt-2">3</h3>
             <p class="text-gray-500 text-xs mt-1">Aktif dipinjam</p>
         </div>
-        <div class="bg-white rounded-2xl p-6 shadow-md border-l-4 border-orange-500">
+        <div class="bg-white rounded-2xl p-6 shadow-md border-l-4 border-purple-600">
             <p class="text-gray-600 text-sm font-medium">Buku Dipinjam</p>
-            <h3 class="text-4xl font-bold text-orange-600 mt-2">3</h3>
+            <h3 class="text-4xl font-bold text-purple-600 mt-2">3</h3>
             <p class="text-gray-500 text-xs mt-1">Total bulan ini</p>
         </div>
     </div>

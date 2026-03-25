@@ -4,14 +4,28 @@
 
 <div class="p-8">
     <!-- HEADER -->
-    <div class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-2xl p-8 mb-8 shadow-lg">
-        <h1 class="text-3xl font-bold">Reservasi Saya</h1>
-        <p class="text-blue-100 mt-2">Lihat dan kelola reservasi buku Anda.</p>
+    <div class="mb-8">
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-3xl p-10 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold">Reservasi</h1>
+                    <p class="text-blue-100 mt-2">Kelola reservasi buku Anda.</p>
+                </div>
+                <i class="bi bi-calendar-check text-5xl opacity-20"></i>
+            </div>
+        </div>
+
     </div>
 `
     <!-- DAFTAR RESERVASI -->
     <div class="bg-white rounded-2xl p-6 shadow-md">
-        <h2 class="text-xl font-bold text-slate-800 mb-6">Buku yang Direservasi</h2>
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+                Daftar Reservasi
+            </h2>
+            <div class="h-1 w-12 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full"></div>
+        </div>
+
 
         <!-- Tabel Reservasi -->
         <div class="overflow-x-auto">
