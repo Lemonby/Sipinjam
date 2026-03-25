@@ -22,7 +22,7 @@
         <div class="lg:col-span-2 space-y-6">
             <!-- Informasi Profil -->
             <div class="bg-white rounded-2xl p-6 shadow-md">
-                <h2 class="text-xl font-bold text-slate-800 mb-6">Informasi Profil</h2>
+                <h2 class="text-2xl font-bold text-slate-800 mb-6">Informasi Profil</h2>
 
                 <div class="space-y-4">
                     <div>

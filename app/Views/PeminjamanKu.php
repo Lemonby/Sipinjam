@@ -8,8 +8,8 @@
         <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-3xl p-10 shadow-xl hover:shadow-2xl transition-shadow duration-300">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-4xl font-bold mb-2">Peminjamanku</h1>
-                    <p class="text-blue-100 text-lg">Kelola semua peminjaman buku dengan mudah</p>
+                    <h1 class="text-3xl font-bold mb-2">Peminjamanku</h1>
+                    <p class="text-blue-100">Kelola semua peminjaman buku dengan mudah</p>
                 </div>
                 <i class="bi bi-bookmarks text-5xl opacity-20"></i>
             </div>
@@ -30,7 +30,7 @@
     <!-- DAFTAR PEMINJAMAN -->
     <div class="bg-white rounded-3xl p-8 shadow-lg">
         <div class="mb-8">
-            <h2 class="text-3xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+            <h2 class="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2">
                 Daftar Peminjaman Aktif
             </h2>
             <div class="h-1 w-12 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full"></div>
@@ -123,31 +123,6 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
-            </div>
-
-            <!-- Summary Card -->
-            <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300 rounded-2xl p-6 text-center">
-                    <i class="bi bi-book text-4xl text-blue-600 mb-2 block"></i>
-                    <p class="text-sm text-blue-700 font-semibold uppercase">Total Peminjaman</p>
-                    <p class="text-4xl font-bold text-blue-900"><?= count($peminjaman) ?></p>
-                </div>
-
-                <div class="bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 rounded-2xl p-6 text-center">
-                    <i class="bi bi-check-circle text-4xl text-green-600 mb-2 block"></i>
-                    <p class="text-sm text-green-700 font-semibold uppercase">Aktif</p>
-                    <p class="text-4xl font-bold text-green-900">
-                        <?= count(array_filter($peminjaman, fn($p) => $p['status'] === 'aktif')) ?>
-                    </p>
-                </div>
-
-                <div class="bg-gradient-to-br from-red-50 to-red-100 border-2 border-red-300 rounded-2xl p-6 text-center">
-                    <i class="bi bi-exclamation-circle text-4xl text-red-600 mb-2 block"></i>
-                    <p class="text-sm text-red-700 font-semibold uppercase">Telat</p>
-                    <p class="text-4xl font-bold text-red-900">
-                        <?= count(array_filter($peminjaman, fn($p) => $p['status'] === 'telat')) ?>
-                    </p>
-                </div>
             </div>
         <?php endif; ?>
     </div>

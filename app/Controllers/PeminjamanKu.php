@@ -57,8 +57,8 @@ class PeminjamanKu extends BaseController
         $all_buku = [
             [
                 'id' => 1, 
-                'judul' => 'Pemrograman Web dengan CodeIgniter', '
-                penulis' => 'John Doe', 
+                'judul' => 'Pemrograman Web dengan CodeIgniter',
+                'penulis' => 'John Doe', 
                 'cover' => 'https://via.placeholder.com/100x150?text=Book+1'
             ],
             [

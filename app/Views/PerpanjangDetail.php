@@ -4,9 +4,11 @@
 
 <div class="p-8">
     <!-- HEADER -->
-    <div class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white rounded-2xl p-8 mb-8 shadow-lg">
-        <h1 class="text-3xl font-bold">Perpanjang Peminjaman</h1>
-        <p class="text-blue-100 mt-2">Perpanjang waktu peminjaman buku Anda.</p>
+    <div class="mb-8">
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-3xl p-10 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+            <h1 class="text-3xl font-bold">Perpanjang Peminjaman</h1>
+            <p class="text-blue-100 mt-2">Perpanjang waktu peminjaman buku Anda.</p>
+        </div>
     </div>
 
     <!-- ALERT MESSAGES -->

@@ -47,10 +47,10 @@
 				<div>
 					<label for="nama_mahasiswa" class="block text-sm font-medium text-slate-700">Nama Mahasiswa</label>
 					<input
-						id="nama_mahasiswa"
-						name="nama_mahasiswa"
+						id="namaMahasiswa"
+						name="namaMahasiswa"
 						type="text"
-						value="<?= old('nama_mahasiswa') ?>"
+						value="<?= old('namaMahasiswa') ?>"
 						class="mt-2 w-full rounded-lg border border-slate-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
 						placeholder="Contoh: Agung Pratama"
 						required

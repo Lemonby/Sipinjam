@@ -14,13 +14,12 @@
                 <i class="bi bi-calendar-check text-5xl opacity-20"></i>
             </div>
         </div>
-
     </div>
-`
+
     <!-- DAFTAR RESERVASI -->
     <div class="bg-white rounded-2xl p-6 shadow-md">
         <div class="mb-8">
-            <h2 class="text-3xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+            <h2 class="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-2">
                 Daftar Reservasi
             </h2>
             <div class="h-1 w-12 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-full"></div>

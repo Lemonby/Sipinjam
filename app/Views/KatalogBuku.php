@@ -8,8 +8,8 @@
         <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-3xl p-10 shadow-xl hover:shadow-2xl transition-shadow duration-300">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-4xl font-bold mb-2">Katalog Buku</h1>
-                    <p class="text-blue-100 text-lg">Jelajahi koleksi lengkap perpustakaan kami</p>
+                    <h1 class="text-3xl font-bold mb-2">Katalog Buku</h1>
+                    <p class="text-blue-100">Jelajahi koleksi lengkap perpustakaan kami</p>
                 </div>
                 <i class="bi bi-book-half text-6xl opacity-20"></i>
             </div>
@@ -20,7 +20,7 @@
     <div class="bg-white rounded-3xl p-8 shadow-lg">
         <!-- SECTION TITLE -->
         <div class="mb-8">
-            <h2 class="text-3xl font-bold text-slate-800 mb-2 flex items-center gap-3">
+            <h2 class="text-2xl font-bold text-slate-800 mb-2 flex items-center gap-3">
                 Rekomendasi untuk Kamu
             </h2>
             <div class="h-1 w-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"></div>
@@ -61,7 +61,7 @@
                             <!-- Status Badge -->
                             <div class="mb-3">
                                 <?php if ($buku['status'] === 'tersedia'): ?>
-                                    <span class="inline-flex items-center gap-1 bg-green-500 text-white px-3 py-1.5 rounded-full text-xs font-bold">
+                                    <span class="inline-flex items-center gap-1 bg-green-100 text-green-600 px-3 py-1.5 rounded-full text-xs font-bold">
                                         <i class="bi bi-check-circle"></i>
                                         Tersedia
                                     </span>

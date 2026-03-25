@@ -34,7 +34,7 @@ class Auth extends BaseController
 
     public function authenticate()
     {
-        $nama = trim((string) $this->request->getPost('nama_mahasiswa'));
+        $nama = trim((string) $this->request->getPost('namaMahasiswa'));
         $nim = trim((string) $this->request->getPost('nim'));
         $jurusan = trim((string) $this->request->getPost('jurusan'));
 
