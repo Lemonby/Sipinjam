@@ -56,7 +56,7 @@
                             <!-- Cover -->
                             <div class="flex-shrink-0">
                                 <div class="w-24 h-36 rounded-xl overflow-hidden shadow-md group-hover:shadow-lg transition-shadow">
-                                    <img src="<?= $p['cover'] ?>" alt="<?= $p['judul'] ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                    <img src="<?= $p['coverBuku'] ?>" alt="<?= $p['judulBuku'] ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                 </div>
                             </div>
 
@@ -64,10 +64,10 @@
                             <div class="flex-1 min-w-0">
                                 <!-- Judul & Penulis -->
                                 <div class="mb-3">
-                                    <h3 class="font-bold text-lg text-slate-800 mb-1 truncate"><?= $p['judul'] ?></h3>
+                                    <h3 class="font-bold text-lg text-slate-800 mb-1 truncate"><?= $p['judulBuku'] ?></h3>
                                     <p class="text-sm text-gray-600 flex items-center gap-1">
                                         <i class="bi bi-pen"></i>
-                                        <?= $p['penulis'] ?>
+                                        <?= $p['penulisBuku'] ?>
                                     </p>
                                 </div>
 
@@ -75,23 +75,23 @@
                                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4 p-4 bg-white rounded-lg border border-gray-200">
                                     <div>
                                         <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Mulai</p>
-                                        <p class="text-sm font-bold text-slate-800"><?= date('d M Y', strtotime($p['tanggal_mulai'])) ?></p>
+                                        <p class="text-sm font-bold text-slate-800"><?= date('d M Y', strtotime($p['tanggalPinjam'])) ?></p>
                                     </div>
                                     <div>
                                         <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Kembali</p>
-                                        <p class="text-sm font-bold text-slate-800"><?= date('d M Y', strtotime($p['tanggal_kembali'])) ?></p>
+                                        <p class="text-sm font-bold text-slate-800"><?= date('d M Y', strtotime($p['tanggalJatuhTempo'])) ?></p>
                                     </div>
                                     <div class="col-span-2 md:col-span-1">
                                         <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide">Durasi</p>
                                         <p class="text-sm font-bold text-slate-800">
-                                            <?= floor((strtotime($p['tanggal_kembali']) - strtotime($p['tanggal_mulai'])) / (60 * 60 * 24)) ?> hari
+                                            <?= floor((strtotime($p['tanggalJatuhTempo']) - strtotime($p['tanggalPinjam'])) / (60 * 60 * 24)) ?> hari
                                         </p>
                                     </div>
                                 </div>
 
                                 <!-- Status & Sisa Hari -->
                                 <div class="flex flex-wrap items-center gap-3 mb-4">
-                                    <?php if ($p['status'] === 'telat'): ?>
+                                    <?php if ($p['status'] === 'terlambat'): ?>
                                         <span class="inline-flex items-center gap-2 bg-red-50 border-2 border-red-400 text-red-700 px-4 py-2 rounded-lg font-semibold text-sm">
                                             <i class="bi bi-exclamation-circle-fill text-lg"></i>
                                             Telat <?= $p['hari_sisa'] ?> hari
@@ -110,11 +110,11 @@
 
                                 <!-- Buttons -->
                                 <div class="flex flex-wrap gap-3">
-                                    <a href="<?= base_url('/peminjaman/perpanjang/' . $p['index']) ?>" class="flex items-center gap-2 px-5 py-2 border-2 border-blue-500 bg-blue-50 text-blue-600 hover:bg-blue-500 hover:text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-md">
+                                    <a href="<?= base_url('/peminjaman/perpanjang/' . $p['idBookCopy']) ?>" class="flex items-center gap-2 px-5 py-2 border-2 border-blue-500 bg-blue-50 text-blue-600 hover:bg-blue-500 hover:text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-md">
                                         <i class="bi bi-arrow-repeat"></i>
                                         <span>Perpanjang</span>
                                     </a>
-                                    <a href="<?= base_url('/peminjaman/kembalikan/' . $p['index']) ?>" class="flex items-center gap-2 px-5 py-2 border-2 border-red-500 bg-red-50 text-red-600 hover:bg-red-500 hover:text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-md">
+                                    <a href="<?= base_url('/peminjaman/kembalikan/' . $p['idBookCopy']) ?>" class="flex items-center gap-2 px-5 py-2 border-2 border-red-500 bg-red-50 text-red-600 hover:bg-red-500 hover:text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-md">
                                         <i class="bi bi-box-seam"></i>
                                         <span>Kembalikan</span>
                                     </a>

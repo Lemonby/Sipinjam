@@ -17,12 +17,12 @@ $routes->get('/logout', 'Auth::logout');
 $routes->get('/katalog', 'Katalog::index');
 
 // Proses Peminjaman
-$routes->get('/peminjaman/(:num)', 'Peminjaman::pinjam/$1');
-$routes->post('/peminjaman/proses', 'Peminjaman::proses_peminjaman');
-$routes->get('/peminjaman/perpanjang/(:num)', 'Peminjaman::perpanjang/$1');
-$routes->post('/peminjaman/proses-perpanjang', 'Peminjaman::proses_perpanjang');
-$routes->get('/peminjaman/kembalikan/(:num)', 'Peminjaman::kembalikan/$1');
-$routes->post('/peminjaman/proses-kembalikan', 'Peminjaman::proses_kembalikan');
+$routes->get('/peminjaman/(:num)', 'Peminjaman::loan/$1');
+$routes->post('/peminjaman/proses', 'Peminjaman::loanProses');
+$routes->get('/peminjaman/perpanjang/(:num)', 'Peminjaman::extend/$1');
+$routes->post('/peminjaman/proses-perpanjang', 'Peminjaman::extendProses');
+$routes->get('/peminjaman/kembalikan/(:num)', 'Peminjaman::return/$1');
+$routes->post('/peminjaman/proses-kembalikan', 'Peminjaman::returnProses');
 $routes->get('/peminjamanku', 'PeminjamanKu::index');
 
 // Peminjaman Buku user

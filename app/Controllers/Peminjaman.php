@@ -4,96 +4,18 @@ namespace App\Controllers;
 
 class Peminjaman extends BaseController
 {
-    private array $DummyBuku = [
-        [
-            'id' => 1,
-            'judul' => 'Pemrograman Web dengan CodeIgniter',
-            'penulis' => 'John Doe',
-            'cover' => 'https://via.placeholder.com/100x150?text=Book+1',
-            'status' => 'tersedia',
-            'tanggal_kembali' => '3 hari lagi',
-        ],
-        [
-            'id' => 2,
-            'judul' => 'Belajar PHP untuk Pemula',
-            'penulis' => 'Jane Smith',
-            'cover' => 'https://via.placeholder.com/100x150?text=Book+2',
-            'status' => 'tidak tersedia',
-            'tanggal_kembali' => '3 hari yang lalu',
-        ],
-        [
-            'id' => 3,
-            'judul' => 'Framework Laravel untuk Semua',
-            'penulis' => 'Alice Johnson',
-            'cover' => 'https://via.placeholder.com/100x150?text=Book+3',
-            'status' => 'tersedia',
-            'tanggal_kembali' => '5 hari lagi',
-        ],
-        [
-            'id' => 4,
-            'judul' => 'Membangun Aplikasi dengan Vue.js',
-            'penulis' => 'Bob Brown',
-            'cover' => 'https://via.placeholder.com/100x150?text=Book+4',
-            'status' => 'tersedia',
-            'tanggal_kembali' => '7 hari lagi',
-        ],
-        [
-            'id' => 5,
-            'judul' => 'Belajar JavaScript dengan Mudah',
-            'penulis' => 'Charlie Davis',
-            'cover' => 'https://via.placeholder.com/100x150?text=Book+5',
-            'status' => 'tidak tersedia',
-            'tanggal_kembali' => '1 hari yang lalu',
-        ],
-        [
-            'id' => 6,
-            'judul' => 'Desain UI/UX untuk Pemula',
-            'penulis' => 'Diana Evans',
-            'cover' => 'https://via.placeholder.com/100x150?text=Book+6',
-            'status' => 'tersedia',
-            'tanggal_kembali' => '10 hari lagi',
-        ],
-        [
-            'id' => 7,
-            'judul' => 'Belajar Python untuk Semua',
-            'penulis' => 'Eve Foster',
-            'cover' => 'https://via.placeholder.com/100x150?text=Book+7',
-            'status' => 'tersedia',
-            'tanggal_kembali' => '2 hari lagi',
-        ],
-        [
-            'id' => 8,
-            'judul' => 'Membangun API dengan Node.js',
-            'penulis' => 'Frank Green',
-            'cover' => 'https://via.placeholder.com/100x150?text=Book+8',
-            'status' => 'tidak tersedia',
-            'tanggal_kembali' => '4 hari yang lalu',
-        ],
-    ];
-
-    public function pinjam($id)
+    public function loan($id)
     {
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // Cari buku berdasarkan ID
-        $buku = null;
-        foreach ($this->DummyBuku as $b) {
-            if ($b['id'] == $id) {
-                $buku = $b;
-                break;
-            }
-        }
-
+        $booksModel = new \App\Models\BooksModel();
+        $book = $booksModel->getBookById($id);
+        
         // Jika buku tidak ditemukan
-        if (!$buku) {
+        if (!$book) {
             return redirect()->to('/katalog')->with('error', 'Buku tidak ditemukan.');
-        }
-
-        // Jika buku tidak tersedia
-        if ($buku['status'] !== 'tersedia') {
-            return redirect()->to('/katalog')->with('error', 'Buku tidak tersedia untuk dipinjam.');
         }
 
         $tanggal_mulai = date('Y-m-d');
@@ -101,19 +23,19 @@ class Peminjaman extends BaseController
 
         return view('PeminjamanDetail', [
             'user' => session()->get('mahasiswa'),
-            'buku' => $buku,
+            'buku' => $book,
             'tanggal_mulai' => $tanggal_mulai,
             'tanggal_kembali' => $tanggal_kembali,
         ]);
     }
 
-    public function proses_peminjaman()
+    public function loanProses()
     {
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        $request = service('request');
+        $request = service('request'); // Ambil data dari form yang menggunakan POST
         $id_buku = $request->getPost('id_buku');
         $tanggal_mulai = $request->getPost('tanggal_mulai');
         $tanggal_kembali = $request->getPost('tanggal_kembali');
@@ -129,79 +51,99 @@ class Peminjaman extends BaseController
             return redirect()->back()->with('error', 'Tanggal kembali harus lebih besar dari tanggal mulai.');
         }
 
-        // Simpan data peminjaman (untuk sekarang hanya session, nanti bisa ke database)
-        $peminjaman = [
-            'id_buku' => $id_buku,
-            'tanggal_mulai' => $tanggal_mulai,
-            'tanggal_kembali' => $tanggal_kembali,
-            'catatan' => $catatan,
-            'status' => 'aktif',
-        ];
+        // dapatkan data pengguna dari session
+        $user = session()->get('mahasiswa');
 
-        // Simpan ke session atau database
-        $session = session();
-        $peminjaman_list = $session->get('peminjaman_list') ?? [];
-        $peminjaman_list[] = $peminjaman;
-        $session->set('peminjaman_list', $peminjaman_list);
+        // dapatkan copi buku yang tersedia
+        $bookCopiesModel = new \App\Models\BookCopiesModel();
+        $availableCopy = $bookCopiesModel->where('idBuku', $id_buku)->where('status', 'tersedia')->first();
+
+        if (!$availableCopy) {
+            return redirect()->back()->with('error', 'Buku tidak tersedia untuk dipinjam.');
+        }
+
+        // Simpan data peminjaman (ke database)
+        $peminjamanModel = new \App\Models\PeminjamanModel();
+        $peminjamanModel->createLoan([
+            'idBookCopy' => $availableCopy['id'],
+            'tanggalPinjam' => $tanggal_mulai,
+            'tanggalJatuhTempo' => $tanggal_kembali,
+            'status' => 'dipinjam',
+            'idUser' => $user['id'],
+            'catatan' => $catatan,
+        ]);
+
+        // Update status buku menjadi "dipinjam"
+        $bookCopiesModel->updateStatus($availableCopy['id'], 'tidak tersedia');
 
         return redirect()->to('/peminjamanku')->with('success', 'Buku berhasil dipinjam!');
     }
 
-    public function perpanjang($index)
+    public function extend($idBookCopy)
     {
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        $session = session();
-        $peminjaman_list = $session->get('peminjaman_list') ?? [];
+        $user = session()->get('mahasiswa');
+        $peminjamanModel = new \App\Models\PeminjamanModel();
+        $booksModel = new \App\Models\BooksModel();
+        $bookCopiesModel = new \App\Models\BookCopiesModel();
+        
+        // Cari peminjaman spesifik berdasarkan idBookCopy dan idUser
+        $dataPeminjaman = $peminjamanModel->getLoanByIdBookCopyAndUser($idBookCopy, $user['id']);
 
-        if (!isset($peminjaman_list[$index])) {
+        if (!$dataPeminjaman) {
             return redirect()->to('/peminjamanku')->with('error', 'Peminjaman tidak ditemukan.');
         }
 
-        $peminjaman = $peminjaman_list[$index];
-        $tanggal_kembali_lama = $peminjaman['tanggal_kembali'];
-        $tanggal_kembali_baru = date('Y-m-d', strtotime($tanggal_kembali_lama . ' +7 days'));
+        // Dapatkan data buku copy
+        $bookCopy = $bookCopiesModel->find($idBookCopy);
+        $buku = $booksModel->find($bookCopy['idBuku']);
 
         return view('PerpanjangDetail', [
-            'user' => session()->get('mahasiswa'),
-            'index' => $index,
-            'peminjaman' => $peminjaman,
-            'buku' => $this->getBukuById($peminjaman['id_buku']),
-            'tanggal_kembali_lama' => $tanggal_kembali_lama,
-            'tanggal_kembali_baru' => $tanggal_kembali_baru,
+            'user' => $user,
+            'idBookCopy' => $idBookCopy,
+            'peminjaman' => $dataPeminjaman,
+            'buku' => $buku,
+            'tanggal_kembali_lama' => $dataPeminjaman['tanggalJatuhTempo'],
+            'tanggal_kembali_baru' => date('Y-m-d', strtotime($dataPeminjaman['tanggalJatuhTempo'] . ' +7 days')),
         ]);
+
     }
 
-    public function proses_perpanjang()
+    public function extendProses()
     {
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
+        $user = session()->get('mahasiswa');
+        $peminjamanModel = new \App\Models\PeminjamanModel();
+
         $request = service('request');
-        $index = $request->getPost('index');
+        $idBookCopy = $request->getPost('idBookCopy');
         $tanggal_kembali_baru = $request->getPost('tanggal_kembali_baru');
 
-        if (!isset($index) || !$tanggal_kembali_baru) {
+        if (!isset($idBookCopy) || !$tanggal_kembali_baru) {
             return redirect()->back()->with('error', 'Data tidak lengkap.');
         }
 
-        $session = session();
-        $peminjaman_list = $session->get('peminjaman_list') ?? [];
-
-        if (!isset($peminjaman_list[$index])) {
-            return redirect()->to('/peminjamanku')->with('error', 'Peminjaman tidak ditemukan.');
+        // Validasi tanggal (tidak boleh lebih awal dari hari ini)
+        if (strtotime($tanggal_kembali_baru) < strtotime(date('Y-m-d'))) {
+            return redirect()->back()->with('error', 'Tanggal kembali tidak boleh lebih awal dari hari ini.');
         }
 
-        $peminjaman_list[$index]['tanggal_kembali'] = $tanggal_kembali_baru;
-        $session->set('peminjaman_list', $peminjaman_list);
+        $result = $peminjamanModel->extendLoan($idBookCopy, $tanggal_kembali_baru, $user['id']);
+
+        if (!$result) {
+            return redirect()->to('/peminjamanku')->with('error', 'Peminjaman tidak ditemukan atau gagal diperpanjang.');
+        }
 
         return redirect()->to('/peminjamanku')->with('success', 'Peminjaman berhasil diperpanjang!');
     }
 
-    public function kembalikan($index)
+    public function return($index)
     {
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
@@ -234,7 +176,7 @@ class Peminjaman extends BaseController
         ]);
     }
 
-    public function proses_kembalikan()
+    public function returnProses()
     {
         if (!session()->get('isLoggedIn')) {
             return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');

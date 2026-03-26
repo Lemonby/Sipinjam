@@ -41,7 +41,7 @@
         </div>
 
         <!-- BOOK GRID -->
-        <?php if (empty($DummyBuku)): ?>
+        <?php if (empty($books)): ?>
             <div class="text-center py-16">
                 <i class="bi bi-inbox text-6xl text-gray-300 block mb-4"></i>
                 <h3 class="text-2xl font-semibold text-gray-500 mb-2">Belum Ada Buku</h3>
@@ -49,18 +49,18 @@
             </div>
         <?php else: ?>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
-                <?php foreach ($DummyBuku as $buku): ?>
+                <?php foreach ($books as $book): ?>
                     <div class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-2">
                         <!-- Cover Image -->
                         <div class="relative h-56 overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300">
-                            <img src="<?= $buku['cover'] ?>" alt="<?= $buku['judul'] ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="<?= $book['cover'] ?>" alt="<?= $book['judul'] ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                         </div>
 
                         <!-- Book Info -->
                         <div class="p-5">
                             <!-- Status Badge -->
                             <div class="mb-3">
-                                <?php if ($buku['status'] === 'tersedia'): ?>
+                                <?php if ($book['statusTersedia'] > 0): ?>
                                     <span class="inline-flex items-center gap-1 bg-green-100 text-green-600 px-3 py-1.5 rounded-full text-xs font-bold">
                                         <i class="bi bi-check-circle"></i>
                                         Tersedia
@@ -75,19 +75,19 @@
 
                             <!-- Title -->
                             <h3 class="font-bold text-slate-800 text-sm mb-1 line-clamp-2 min-h-10">
-                                <?= $buku['judul'] ?>
+                                <?= $book['judul'] ?>
                             </h3>
 
                             <!-- Author -->
                             <p class="text-xs text-gray-600 mb-4 flex items-center gap-1 line-clamp-1">
                                 <i class="bi bi-person-fill text-gray-400"></i>
-                                <?= $buku['penulis'] ?>
+                                <?= $book['penulis'] ?>
                             </p>
 
                             <!-- Button -->
                             <div class="pt-3 border-t-2 border-gray-100">
-                                <?php if ($buku['status'] === 'tersedia'): ?>
-                                    <a href="<?= base_url('/peminjaman/' . $buku['id']) ?>" class="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-2.5 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg group/btn">
+                                <?php if ($book['statusTersedia'] > 0): ?>
+                                    <a href="<?= base_url('/peminjaman/' . $book['id']) ?>" class="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-2.5 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg group/btn">
                                         <i class="bi bi-bag-check-fill group-hover/btn:scale-110 transition-transform"></i>
                                         <span>Pinjam</span>
                                     </a>
@@ -108,7 +108,7 @@
                 <div class="inline-block bg-blue-50 border-2 border-blue-300 rounded-xl px-6 py-4">
                     <p class="text-sm text-gray-600">
                         <i class="bi bi-info-circle text-blue-600 mr-2"></i>
-                        Menampilkan <strong><?= count($DummyBuku) ?></strong> buku dari koleksi perpustakaan kami
+                        Menampilkan <strong><?= count($books) ?></strong> buku dari koleksi perpustakaan kami
                     </p>
                 </div>
             </div>

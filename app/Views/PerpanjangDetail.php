@@ -42,7 +42,7 @@
 
                     <div class="border-t pt-3">
                         <p class="text-gray-600 font-semibold">TANGGAL MULAI</p>
-                        <p class="text-slate-700"><?= date('d M Y', strtotime($peminjaman['tanggal_mulai'])) ?></p>
+                        <p class="text-slate-700"><?= date('d M Y', strtotime($peminjaman['tanggalPinjam'])) ?></p>
                     </div>
 
                     <div>
@@ -60,7 +60,7 @@
 
                 <form action="<?= base_url('/peminjaman/proses-perpanjang') ?>" method="POST" class="space-y-6">
                     <?= csrf_field() ?>
-                    <input type="hidden" name="index" value="<?= $index ?>">
+                    <input type="hidden" name="idBookCopy" value="<?= $idBookCopy ?>">
 
                     <!-- Status Sebelumnya -->
                     <div class="bg-gray-50 border-2 border-gray-200 rounded-lg p-4">
@@ -73,7 +73,7 @@
                             <div class="text-right">
                                 <p class="text-sm text-gray-600 font-semibold">DURASI</p>
                                 <p class="text-2xl font-bold text-blue-600">
-                                    <?= floor((strtotime($tanggal_kembali_lama) - strtotime($peminjaman['tanggal_mulai'])) / (60 * 60 * 24)) ?> hari
+                                    <?= floor((strtotime($tanggal_kembali_lama) - strtotime($peminjaman['tanggalPinjam'])) / (60 * 60 * 24)) ?> hari
                                 </p>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                     <!-- Tanggal Kembali Baru -->
                     <div>
                         <label for="tanggal_kembali_baru" class="block text-sm font-semibold text-slate-700 mb-2">Tanggal Kembali Baru <span class="text-red-500">*</span></label>
-                        <input type="date" id="tanggal_kembali_baru" name="tanggal_kembali_baru" value="<?= $tanggal_kembali_baru ?>" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent" required>
+                        <input type="date" id="tanggal_kembali_baru" name="tanggal_kembali_baru" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent" required>
                         <p class="text-xs text-gray-500 mt-1">Default 7 hari perpanjangan: <?= date('d M Y', strtotime($tanggal_kembali_baru)) ?></p>
                     </div>
 

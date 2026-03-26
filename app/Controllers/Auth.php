@@ -7,33 +7,22 @@ class Auth extends BaseController
     /**
      * Dummy data mahasiswa untuk simulasi login tanpa database.
      */
-    private array $dummyMahasiswa = [
-        [
-            'nama' => 'Agung Pratama',
-            'nim' => '22011001',
-            'jurusan' => 'Teknik Informatika',
-        ],
-        [
-            'nama' => 'Nadia Putri',
-            'nim' => '22011002',
-            'jurusan' => 'Sistem Informasi',
-        ],
-        [
-            'nama' => 'Raka Maulana',
-            'nim' => '22011003',
-            'jurusan' => 'Teknik Komputer',
-        ],
-    ];
 
     public function login(): string
     {
+        $authModel = new \App\Models\AuthModel();
+        $mahasiswa = $authModel->getAllUsers();
         return view('Login', [
-            'dummyMahasiswa' => $this->dummyMahasiswa,
+            'dummyMahasiswa' => $mahasiswa,
         ]);
     }
 
     public function authenticate()
     {
+
+        $authModel = new \App\Models\AuthModel();
+        $allMahasiswa = $authModel->getAllUsers();
+        
         $nama = trim((string) $this->request->getPost('namaMahasiswa'));
         $nim = trim((string) $this->request->getPost('nim'));
         $jurusan = trim((string) $this->request->getPost('jurusan'));
@@ -42,7 +31,7 @@ class Auth extends BaseController
             return redirect()->back()->withInput()->with('error', 'Semua field wajib diisi.');
         }
 
-        foreach ($this->dummyMahasiswa as $mahasiswa) {
+        foreach ($allMahasiswa as $mahasiswa) {
             $isMatch = strtolower($mahasiswa['nama']) === strtolower($nama)
                 && $mahasiswa['nim'] === $nim
                 && strtolower($mahasiswa['jurusan']) === strtolower($jurusan);
