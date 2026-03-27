@@ -49,17 +49,6 @@ class Auth extends BaseController
         return redirect()->back()->withInput()->with('error', 'Data tidak cocok dengan akun dummy yang tersedia.');
     }
 
-    public function dashboard(): string
-    {
-        if (! session()->get('isLoggedIn')) {
-            return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
-        }
-
-        return view('Dashboard', [
-            'user' => session()->get('mahasiswa'),
-        ]);
-    }
-
     public function logout()
     {
         session()->destroy();

@@ -10,7 +10,7 @@ $routes->get('/', 'Home::index');
 // Authentication 
 $routes->get('/login', 'Auth::login');
 $routes->post('/login', 'Auth::authenticate');
-$routes->get('/dashboard', 'Auth::dashboard');
+$routes->get('/dashboard', 'Dashboard::index');
 $routes->get('/logout', 'Auth::logout');
 
 // Katalog Buku

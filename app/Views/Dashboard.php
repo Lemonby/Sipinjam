@@ -18,12 +18,12 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         <div class="bg-white rounded-2xl p-6 shadow-md border-l-4 border-blue-600">
             <p class="text-gray-600 text-sm font-medium">Buku Dipinjam</p>
-            <h3 class="text-4xl font-bold text-blue-600 mt-2">3</h3>
+            <h3 class="text-4xl font-bold text-blue-600 mt-2"><?= $dataUser[0]['totalDipinjam'] ?? 0 ?></h3>
             <p class="text-gray-500 text-xs mt-1">Aktif dipinjam</p>
         </div>
         <div class="bg-white rounded-2xl p-6 shadow-md border-l-4 border-purple-600">
             <p class="text-gray-600 text-sm font-medium">Buku Dipinjam</p>
-            <h3 class="text-4xl font-bold text-purple-600 mt-2">3</h3>
+            <h3 class="text-4xl font-bold text-purple-600 mt-2"><?= $dataUser[0]['totalDipinjam'] ?? 0 ?></h3>
             <p class="text-gray-500 text-xs mt-1">Total bulan ini</p>
         </div>
     </div>
@@ -40,41 +40,33 @@
                     <a href="#" class="text-blue-500 hover:text-blue-600 text-sm font-medium">Lihat Semua</a>
                 </div>
 
-                <!-- Card Buku 1 -->
-                <div class="flex gap-4 pb-4 border-b border-gray-200 mb-4">
-                    <div class="w-20 h-28 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center text-white text-xs font-bold">
-                        Atomic Habit
+                <?php if ($dataUser[0]['totalDipinjam'] == 0): ?>
+                    <div class="flex flex-col items-center gap-4 py-10">
+                        <i class="bi bi-book text-gray-400 text-6xl"></i>
+                        <p class="text-gray-600 text-sm">Kamu belum meminjam buku apapun. Ayo jelajahi katalog dan temukan buku favoritmu!</p>
                     </div>
-                    <div class="flex-1">
-                        <h3 class="font-semibold text-lg text-slate-800">Atomic Habit</h3>
-                        <p class="text-sm text-gray-600">James Clare</p>
-                        <div class="flex items-center gap-2 mt-2 text-orange-500">
-                            <i class="bi bi-hourglass-split text-sm"></i>
-                            <span class="text-sm">3 Hari Lagi</span>
+                    
+                <?php else: ?>
+                    <!-- Card Buku Aktif -->
+                    <?php foreach ($dataUser as $buku): ?>
+                        <div class="flex gap-4 pb-4 border-b border-gray-200 mb-4">
+                            <div class="w-20 h-28 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center text-white text-xs font-bold">
+                                <?= substr($buku['judulBuku'], 0, 10) ?>...
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-lg text-slate-800"><?= $buku['judulBuku'] ?></h3>
+                                <p class="text-sm text-gray-600"><?= $buku['penulisBuku'] ?></p>
+                                <div class="flex items-center gap-2 mt-2 text-orange-500">
+                                    <i class="bi bi-hourglass-split text-sm"></i>
+                                    <span class="text-sm"><?= $buku['sisaHari'] ?> Hari Lagi</span>
+                                </div>
+                                <button class="mt-3 px-4 py-1 border-2 border-blue-500 text-blue-500 hover:bg-blue-50 rounded-lg text-sm font-medium transition">
+                                    Perpanjang
+                                </button>
+                            </div>
                         </div>
-                        <button class="mt-3 px-4 py-1 border-2 border-blue-500 text-blue-500 hover:bg-blue-50 rounded-lg text-sm font-medium transition">
-                            Perpanjang
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Card Buku 2 -->
-                <div class="flex gap-4 pb-4 border-b border-gray-200 mb-4">
-                    <div class="w-20 h-28 bg-gradient-to-br from-gray-700 to-black rounded-lg flex items-center justify-center text-white text-xs font-bold text-center px-1">
-                        Psyco logy Of Money
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="font-semibold text-lg text-slate-800">Psychology Of Money</h3>
-                        <p class="text-sm text-gray-600">James Clare</p>
-                        <div class="flex items-center gap-2 mt-2 text-orange-500">
-                            <i class="bi bi-hourglass-split text-sm"></i>
-                            <span class="text-sm">5 Hari Lagi</span>
-                        </div>
-                        <button class="mt-3 px-4 py-1 border-2 border-blue-500 text-blue-500 hover:bg-blue-50 rounded-lg text-sm font-medium transition">
-                            Perpanjang
-                        </button>
-                    </div>
-                </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </div>
 
             <!-- Section Rekomendasi Untukmu -->
