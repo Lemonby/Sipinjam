@@ -47,7 +47,7 @@
 
                     <div>
                         <p class="text-gray-600 font-semibold">TANGGAL KEMBALI SEBELUMNYA</p>
-                        <p class="text-red-600 font-bold"><?= date('d M Y', strtotime($tanggal_kembali_lama)) ?></p>
+                        <p class="text-red-600 font-bold"><?= date('d M Y', strtotime($tanggalKembaliLama)) ?></p>
                     </div>
                 </div>
             </div>
@@ -68,12 +68,12 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <p class="text-lg font-bold text-slate-800">Kembali pada:</p>
-                                <p class="text-gray-600"><?= date('d M Y', strtotime($tanggal_kembali_lama)) ?></p>
+                                <p class="text-gray-600"><?= date('d M Y', strtotime($tanggalKembaliLama)) ?></p>
                             </div>
                             <div class="text-right">
                                 <p class="text-sm text-gray-600 font-semibold">DURASI</p>
                                 <p class="text-2xl font-bold text-blue-600">
-                                    <?= floor((strtotime($tanggal_kembali_lama) - strtotime($peminjaman['tanggalPinjam'])) / (60 * 60 * 24)) ?> hari
+                                    <?= floor((strtotime($tanggalKembaliLama) - strtotime($peminjaman['tanggalPinjam'])) / (60 * 60 * 24)) ?> hari
                                 </p>
                             </div>
                         </div>
@@ -81,16 +81,16 @@
 
                     <!-- Tanggal Kembali Baru -->
                     <div>
-                        <label for="tanggal_kembali_baru" class="block text-sm font-semibold text-slate-700 mb-2">Tanggal Kembali Baru <span class="text-red-500">*</span></label>
-                        <input type="date" id="tanggal_kembali_baru" name="tanggal_kembali_baru" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent" required>
-                        <p class="text-xs text-gray-500 mt-1">Default 7 hari perpanjangan: <?= date('d M Y', strtotime($tanggal_kembali_baru)) ?></p>
+                        <label for="tanggalKembaliBaru" class="block text-sm font-semibold text-slate-700 mb-2">Tanggal Kembali Baru <span class="text-red-500">*</span></label>
+                        <input type="date" id="tanggalKembaliBaru" name="tanggalKembaliBaru" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent" required>
+                        <p class="text-xs text-gray-500 mt-1">Default 7 hari perpanjangan: <?= date('d M Y', strtotime($tanggalKembaliBaru)) ?></p>
                     </div>
 
                     <!-- Durasi Perpanjangan (Read-only) -->
                     <div class="bg-green-50 border-2 border-green-200 rounded-lg p-4">
-                        <label for="durasi_perpanjangan" class="block text-sm font-semibold text-slate-700 mb-2">Durasi Perpanjangan Tambahan</label>
-                        <div class="text-3xl font-bold text-green-600" id="durasi_perpanjangan">7 hari</div>
-                        <p class="text-xs text-gray-600 mt-2">Dari <?= date('d M Y', strtotime($tanggal_kembali_lama)) ?> hingga tanggal yang Anda pilih</p>
+                        <label for="durasiPerpanjangan" class="block text-sm font-semibold text-slate-700 mb-2">Durasi Perpanjangan Tambahan</label>
+                        <div class="text-3xl font-bold text-green-600" id="durasiPerpanjangan">7 hari</div>
+                        <p class="text-xs text-gray-600 mt-2">Dari <?= date('d M Y', strtotime($tanggalKembaliLama)) ?> hingga tanggal yang Anda pilih</p>
                     </div>
 
                     <!-- Info Penting -->
@@ -117,9 +117,9 @@
 
 <!-- JavaScript untuk menghitung durasi perpanjangan -->
 <script>
-    const tanggalKembaliLama = new Date('<?= $tanggal_kembali_lama ?>');
-    const tanggalKembaliBaruInput = document.getElementById('tanggal_kembali_baru');
-    const durasiPerpanjanganDiv = document.getElementById('durasi_perpanjangan');
+    const tanggalKembaliLama = new Date('<?= $tanggalKembaliLama ?>');
+    const tanggalKembaliBaruInput = document.getElementById('tanggalKembaliBaru');
+    const durasiPerpanjanganDiv = document.getElementById('durasiPerpanjangan');
 
     function hitungDurasiPerpanjangan() {
         const tanggalKembaliBaru = new Date(tanggalKembaliBaruInput.value);

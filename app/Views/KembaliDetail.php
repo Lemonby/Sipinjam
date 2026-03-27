@@ -57,12 +57,12 @@
 
                     <div class="border-t pt-3">
                         <p class="text-gray-600 font-semibold">TANGGAL MULAI</p>
-                        <p class="text-slate-700"><?= date('d M Y', strtotime($peminjaman['tanggal_mulai'])) ?></p>
+                        <p class="text-slate-700"><?= date('d M Y', strtotime($peminjaman['tanggalPinjam'])) ?></p>
                     </div>
 
                     <div>
                         <p class="text-gray-600 font-semibold">TANGGAL KEMBALI TERJADWAL</p>
-                        <p class="text-slate-700"><?= date('d M Y', strtotime($peminjaman['tanggal_kembali'])) ?></p>
+                        <p class="text-slate-700"><?= date('d M Y', strtotime($peminjaman['tanggalJatuhTempo'])) ?></p>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
 
                 <form action="<?= base_url('/peminjaman/proses-kembalikan') ?>" method="POST" class="space-y-6">
                     <?= csrf_field() ?>
-                    <input type="hidden" name="index" value="<?= $index ?>">
+                    <input type="hidden" name="idBookCopy" value="<?= $idBookCopy ?>">
 
                     <!-- Timeline Peminjaman -->
                     <div class="bg-gray-50 border-2 border-gray-200 rounded-lg p-4">
@@ -84,18 +84,18 @@
                             <div class="flex items-center">
                                 <div class="flex-1">
                                     <p class="text-sm text-gray-600">Tanggal Mulai</p>
-                                    <p class="font-semibold text-slate-800"><?= date('d M Y', strtotime($peminjaman['tanggal_mulai'])) ?></p>
+                                    <p class="font-semibold text-slate-800"><?= date('d M Y', strtotime($peminjaman['tanggalPinjam'])) ?></p>
                                 </div>
                                 <i class="bi bi-arrow-right text-gray-400 mx-4"></i>
                                 <div class="flex-1">
                                     <p class="text-sm text-gray-600">Tanggal Kembali Terjadwal</p>
-                                    <p class="font-semibold text-slate-800"><?= date('d M Y', strtotime($peminjaman['tanggal_kembali'])) ?></p>
+                                    <p class="font-semibold text-slate-800"><?= date('d M Y', strtotime($peminjaman['tanggalJatuhTempo'])) ?></p>
                                 </div>
                             </div>
                             <div class="bg-blue-50 border border-blue-200 rounded p-2">
                                 <p class="text-xs text-blue-800">
                                     <i class="bi bi-info-circle mr-1"></i>
-                                    Total durasi peminjaman: <strong><?= floor((strtotime($peminjaman['tanggal_kembali']) - strtotime($peminjaman['tanggal_mulai'])) / (60 * 60 * 24)) ?> hari</strong>
+                                    Total durasi peminjaman: <strong><?= floor((strtotime($peminjaman['tanggalJatuhTempo']) - strtotime($peminjaman['tanggalPinjam'])) / (60 * 60 * 24)) ?> hari</strong>
                                 </p>
                             </div>
                         </div>
@@ -120,7 +120,7 @@
                             <?php if ($denda > 0): ?>
                                 <div class="flex justify-between items-center pt-2 border-t">
                                     <span class="text-gray-700">Hari keterlambatan:</span>
-                                    <span class="font-bold text-red-600"><?= floor((strtotime($tanggal_pengembalian) - strtotime($peminjaman['tanggal_kembali'])) / (60 * 60 * 24)) ?> hari</span>
+                                    <span class="font-bold text-red-600"><?= floor((strtotime($tanggal_pengembalian) - strtotime($peminjaman['tanggalJatuhTempo'])) / (60 * 60 * 24)) ?> hari</span>
                                 </div>
                                 <div class="flex justify-between items-center pt-2 border-t">
                                     <span class="text-gray-700">Tarif denda:</span>

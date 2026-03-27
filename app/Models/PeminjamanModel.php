@@ -9,6 +9,11 @@ class PeminjamanModel extends Model
     protected $primaryKey = 'id';
     protected $allowedFields = ['idBookCopy', 'tanggalPinjam', 'tanggalJatuhTempo', 'tanggalKembali', 'status', 'idUser'];
 
+    public function createLoan($data)
+    {
+        return $this->insert($data);
+    }
+
     public function getLoansByUserId($userId)
     {
         return $this->select('*')->where('idUser', $userId)->findAll();
@@ -39,8 +44,24 @@ class PeminjamanModel extends Model
                     ->update();
     }
 
-    public function createLoan($data)
+    public function returnLoan($idBookCopy, $tanggalKembali, $idUser)
     {
-        return $this->insert($data);
+        // Cek apakah peminjaman ada
+        $existing = $this->where('idBookCopy', $idBookCopy)
+                        ->where('idUser', $idUser)
+                        ->first();
+
+        if (!$existing) {
+            return false; // Data tidak ditemukan
+        }
+
+        // Update jika data ada
+        return $this->set([
+                    'tanggalKembali' => $tanggalKembali,
+                    'status' => 'kembali'
+                ])
+                ->where('idBookCopy', $idBookCopy)
+                ->where('idUser', $idUser)
+                ->update();
     }
 }

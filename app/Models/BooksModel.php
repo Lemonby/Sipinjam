@@ -11,6 +11,7 @@ class BooksModel extends Model
     // Daftarkan kolom yang boleh dimanipulasi
     protected $allowedFields = ['judul', 'penulis', 'penerbit', 'tahunTerbit', 'idKategori', 'deskripsi', 'cover'];
 
+    // fungsi untuk mendapatkan semua buku beserta jumlah copy yang tersedia
     public function getAvailableBooks()
     {
         return $this->select('
@@ -22,20 +23,9 @@ class BooksModel extends Model
             ->findAll();
     }
 
+    // fungsi untuk mendapatkan detail buku berdasarkan id
     public function getBookById($id)
     {
         return $this->select('books.*')->where('id', $id)->first();
-    }
-
-    public function getBookAvailability($id)
-    {
-        return $this->select('
-                books.*, 
-                SUM(CASE WHEN bookCopies.status = "tersedia" THEN 1 ELSE 0 END) as statusTersedia
-            ')
-            ->join('bookCopies', 'bookCopies.idBuku = books.id', 'left')
-            ->where('bookCopies.id', $id)
-            ->groupBy('books.id')
-            ->first();
     }
 }

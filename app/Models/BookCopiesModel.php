@@ -19,4 +19,10 @@ class BookCopiesModel extends Model
         return $this->update($bookCopyId, ['status' => $status]);
     }
 
+    // fungsi untuk mendapatkan satu copy buku berdasarkan id copy
+    public function getBookCopyById($idBookCopy)
+    {
+        return $this->find($idBookCopy);
+    }
+
 }

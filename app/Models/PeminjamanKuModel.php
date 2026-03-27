@@ -20,8 +20,8 @@ class PeminjamanKuModel extends Model
         
         ->join('bookCopies', 'bookCopies.id = loans.idBookCopy')
         ->join('books', 'books.id = bookCopies.idBuku')
+        ->where('loans.status', 'dipinjam')
         ->where('loans.idUser', $user_id)
         ->findAll();
     }
-
 }
