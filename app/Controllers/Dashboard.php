@@ -13,11 +13,13 @@ class Dashboard extends BaseController
         $dashboardModel = new \App\Models\DashboardModel();
         $user = $dashboardModel->getUserByNim();
         $dataUser = $dashboardModel->getDataUser();
+        $dataKatalog = $dashboardModel->getAvailableBooks();
 
 
         return view('Dashboard', [
             'user' => $user,
             'dataUser' => $dataUser,
+            'dataKatalog' => $dataKatalog,
         ]);
     }
 

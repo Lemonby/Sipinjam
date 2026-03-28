@@ -37,7 +37,7 @@
             <div class="bg-white rounded-2xl p-6 shadow-md mb-8">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-bold text-slate-800">Peminjamanku</h2>
-                    <a href="#" class="text-blue-500 hover:text-blue-600 text-sm font-medium">Lihat Semua</a>
+                    <a href="<?= base_url('/peminjamanku') ?>" class="text-blue-500 hover:text-blue-600 text-sm font-medium">Lihat Semua</a>
                 </div>
 
                 <?php if ($dataUser[0]['totalDipinjam'] == 0): ?>
@@ -60,9 +60,12 @@
                                     <i class="bi bi-hourglass-split text-sm"></i>
                                     <span class="text-sm"><?= $buku['sisaHari'] ?> Hari Lagi</span>
                                 </div>
-                                <button class="mt-3 px-4 py-1 border-2 border-blue-500 text-blue-500 hover:bg-blue-50 rounded-lg text-sm font-medium transition">
-                                    Perpanjang
-                                </button>
+                                <div class="flex items-center mt-1">
+                                    <a href="<?= base_url('/peminjaman/perpanjang/' . $buku['idBookCopy']) ?>" class="focus:outline-none gap-2 px-2 py-1.5 w-auto border-2 bg-blue-50 border-blue-500 text-blue-600 hover:bg-blue-500 hover:text-white rounded-lg text-sm font-semibold transition">
+                                        <i class="bi bi-arrow-repeat text-sm"></i>
+                                        <span>Perpanjang</span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -74,58 +77,97 @@
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-bold text-slate-800">Rekomendasi Untukmu</h2>
                     <div class="flex gap-2">
-                        <button class="p-2 border border-gray-300 rounded-full hover:bg-gray-100 transition">
+                        <button id="scrollLeft" class="p-2 border border-gray-300 rounded-full hover:bg-gray-100 transition cursor-pointer">
                             <i class="bi bi-chevron-left"></i>
                         </button>
-                        <button class="p-2 border border-gray-300 rounded-full hover:bg-gray-100 transition">
+                        <button id="scrollRight" class="p-2 border border-gray-300 rounded-full hover:bg-gray-100 transition cursor-pointer">
                             <i class="bi bi-chevron-right"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- Grid Buku Rekomendasi -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    <!-- Book 1 -->
-                    <div class="text-left">
-                        <div class="w-full h-32 bg-gradient-to-br from-yellow-300 to-yellow-600 rounded-lg mb-2 flex items-center justify-center">
-                            <i class="bi bi-book text-white text-2xl"></i>
+                <!-- Horizontal Scrollable Container -->
+                <div id="booksScroller" class="flex gap-4 overflow-x-auto pb-2 scroll-smooth" style="scroll-behavior: smooth;">
+                    <?php foreach($dataKatalog as $katalog): ?> 
+                        <div class="flex-shrink-0 w-60 text-left group cursor-move">
+                            <div class="w-full h-32 bg-gradient-to-br from-amber-700 to-yellow-900 rounded-lg mb-2 flex items-center justify-center group-hover:shadow-lg transition-shadow">
+                                <i class="bi bi-book text-white text-2xl"></i>
+                            </div>
+                            <p class="text-xs font-medium text-green-600 bg-green-100 rounded-full px-2 py-1 inline-block mb-1"><?= $katalog['statusTersedia'] ?> Tersedia</p>
+                            <h4 class="font-semibold text-sm text-slate-800 truncate"><?= $katalog['judul'] ?></h4>
+                            <p class="text-xs text-gray-600 truncate"><?= $katalog['penulis'] ?></p>
                         </div>
-                        <p class="text-xs font-medium text-green-600 bg-green-100 rounded-full px-2 py-1 inline-block mb-1">Tersedia</p>
-                        <h4 class="font-semibold text-sm text-slate-800">Harry Potter</h4>
-                        <p class="text-xs text-gray-600">James Clare</p>
-                    </div>
-
-                    <!-- Book 2 -->
-                    <div class="text-left">
-                        <div class="w-full h-32 bg-gradient-to-br from-gray-800 to-black rounded-lg mb-2 flex items-center justify-center">
-                            <i class="bi bi-book text-white text-2xl"></i>
-                        </div>
-                        <p class="text-xs font-medium text-green-600 bg-green-100 rounded-full px-2 py-1 inline-block mb-1">Tersedia</p>
-                        <h4 class="font-semibold text-sm text-slate-800">Memory</h4>
-                        <p class="text-xs text-gray-600">James Clare</p>
-                    </div>
-
-                    <!-- Book 3 -->
-                    <div class="text-left">
-                        <div class="w-full h-32 bg-gradient-to-br from-red-600 to-red-800 rounded-lg mb-2 flex items-center justify-center">
-                            <i class="bi bi-book text-white text-2xl"></i>
-                        </div>
-                        <p class="text-xs font-medium text-green-600 bg-green-100 rounded-full px-2 py-1 inline-block mb-1">Tersedia</p>
-                        <h4 class="font-semibold text-sm text-slate-800">Ladybird</h4>
-                        <p class="text-xs text-gray-600">James Clare</p>
-                    </div>
-
-                    <!-- Book 4 -->
-                    <div class="text-left">
-                        <div class="w-full h-32 bg-gradient-to-br from-amber-700 to-yellow-900 rounded-lg mb-2 flex items-center justify-center">
-                            <i class="bi bi-book text-white text-2xl"></i>
-                        </div>
-                        <p class="text-xs font-medium text-green-600 bg-green-100 rounded-full px-2 py-1 inline-block mb-1">Tersedia</p>
-                        <h4 class="font-semibold text-sm text-slate-800">Kepada yang hilang</h4>
-                        <p class="text-xs text-gray-600">James Clare</p>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
+
+            <script>
+                const scroller = document.getElementById('booksScroller');
+                const scrollLeft = document.getElementById('scrollLeft');
+                const scrollRight = document.getElementById('scrollRight');
+                
+                const scrollAmount = 320; // Width of item + gap
+                
+                // Arrow button functionality
+                scrollLeft.addEventListener('click', () => {
+                    scroller.scrollBy({
+                        left: -scrollAmount,
+                        behavior: 'smooth'
+                    });
+                });
+                
+                scrollRight.addEventListener('click', () => {
+                    scroller.scrollBy({
+                        left: scrollAmount,
+                        behavior: 'smooth'
+                    });
+                });
+                
+                // Drag functionality
+                let isDown = false;
+                let startX;
+                let scrollLeft_;
+                
+                scroller.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    startX = e.pageX - scroller.offsetLeft;
+                    scrollLeft_ = scroller.scrollLeft;
+                    scroller.style.cursor = 'grabbing';
+                    scroller.style.scrollBehavior = 'auto';
+                });
+                
+                scroller.addEventListener('mouseleave', () => {
+                    isDown = false;
+                    scroller.style.cursor = 'auto';
+                    scroller.style.scrollBehavior = 'smooth';
+                });
+                
+                scroller.addEventListener('mouseup', () => {
+                    isDown = false;
+                    scroller.style.cursor = 'auto';
+                    scroller.style.scrollBehavior = 'smooth';
+                });
+                
+                scroller.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - scroller.offsetLeft;
+                    const walk = (x - startX) * 1;
+                    scroller.scrollLeft = scrollLeft_ - walk;
+                });
+                
+                // Touch drag for mobile
+                scroller.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].pageX - scroller.offsetLeft;
+                    scrollLeft_ = scroller.scrollLeft;
+                });
+                
+                scroller.addEventListener('touchmove', (e) => {
+                    const x = e.touches[0].pageX - scroller.offsetLeft;
+                    const walk = (x - startX) * 1;
+                    scroller.scrollLeft = scrollLeft_ - walk;
+                });
+            </script>
         </div>
 
         <!-- RIGHT SIDEBAR -->
