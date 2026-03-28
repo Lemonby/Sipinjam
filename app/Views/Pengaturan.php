@@ -16,71 +16,94 @@
         </div>
     </div>
 
+    <!-- ALERT MESSAGES -->
+    <?php if (session()->get('success')): ?>
+            <div class="bg-green-50 border-2 border-green-400 text-green-800 px-6 py-4 rounded-xl mb-6 flex items-center gap-3 shadow-md animate-pulse">
+                <i class="bi bi-check-circle-fill text-2xl text-green-600"></i>
+                <div>
+                    <p class="font-semibold">Berhasil!</p>
+                    <p class="text-sm"><?= session()->get('success') ?></p>
+                </div>
+            </div>
+    <?php elseif (session()->get('error')): ?>
+        <div class="bg-red-50 border-2 border-red-400 text-red-800 px-6 py-4 rounded-xl mb-6 flex items-center gap-3 shadow-md animate-pulse">
+            <i class="bi bi-exclamation-triangle-fill text-2xl text-red-600"></i>
+            <div>
+                <p class="font-semibold">Error!</p>
+                <p class="text-sm"><?= session()->get('error') ?></p>
+            </div>
+        </div>
+    <?php endif; ?>
+
     <!-- PENGATURAN AKUN -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- MAIN CONTENT -->
         <div class="lg:col-span-2 space-y-6">
             <!-- Informasi Profil -->
-            <div class="bg-white rounded-2xl p-6 shadow-md">
-                <h2 class="text-2xl font-bold text-slate-800 mb-6">Informasi Profil</h2>
+            <form action="<?= base_url('/pengaturan/update-profil') ?>" method="POST">
+                <div class="bg-white rounded-2xl p-6 shadow-md">
+                    <h2 class="text-2xl font-bold text-slate-800 mb-6">Informasi Profil</h2>
 
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">Nama Lengkap</label>
-                        <input type="text" value="<?= esc($user['nama']) ?>" class="w-full rounded-lg border border-gray-300 px-4 py-2 bg-gray-50 text-gray-700" readonly>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Nama Lengkap</label>
+                            <input type="text" value="<?= esc($user['nama']) ?>" name="nama" class="w-full rounded-lg border border-gray-300 px-4 py-2 bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition transition-duration-200">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">NIM</label>
+                            <input type="text" value="<?= esc($user['nim']) ?>" name="nim" class="w-full rounded-lg border border-gray-300 px-4 py-2 bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition transition-duration-200">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Jurusan</label>
+                            <input type="text" value="<?= esc($user['jurusan']) ?>" name="jurusan" class="w-full rounded-lg border border-gray-300 px-4 py-2 bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition transition-duration-200">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Email</label>
+                            <input type="email" value="<?= esc($user['email']) ?>" name="email" class="w-full rounded-lg border border-gray-300 px-4 py-2 bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition transition-duration-200">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">No. Handphone</label>
+                            <input type="tel" value="<?= esc($user['telp']) ?>" name="telp" class="w-full rounded-lg border border-gray-300 px-4 py-2 bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 transition transition-duration-200">
+                        </div>
+
+                        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition">
+                            Simpan Perubahan
+                        </button>
                     </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">NIM</label>
-                        <input type="text" value="<?= esc($user['nim']) ?>" class="w-full rounded-lg border border-gray-300 px-4 py-2 bg-gray-50 text-gray-700" readonly>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">Jurusan</label>
-                        <input type="text" value="<?= esc($user['jurusan']) ?>" class="w-full rounded-lg border border-gray-300 px-4 py-2 bg-gray-50 text-gray-700" readonly>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">Email</label>
-                        <input type="email" placeholder="masukkan email Anda" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">No. Handphone</label>
-                        <input type="tel" placeholder="08xxxxxxxxxx" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                    </div>
-
-                    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition">
-                        Simpan Perubahan
-                    </button>
                 </div>
-            </div>
+            </form>
 
             <!-- Keamanan -->
-            <div class="bg-white rounded-2xl p-6 shadow-md">
-                <h2 class="text-xl font-bold text-slate-800 mb-6">Keamanan</h2>
+            <form action="<?= base_url('pengaturan/update-password') ?>" method="post">
+                <div class="bg-white rounded-2xl p-6 shadow-md">
+                    <h2 class="text-xl font-bold text-slate-800 mb-6">Keamanan</h2>
 
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">Password Lama</label>
-                        <input type="password" placeholder="masukkan password lama" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Password Lama</label>
+                            <input type="password" name="passwordLama" placeholder="masukkan password lama" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition transition-duration-200">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Password Baru</label>
+                            <input type="password" name="passwordBaru" placeholder="masukkan password baru" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition transition-duration-200">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-2">Konfirmasi Password Baru</label>
+                            <input type="password" name="konfirmasiPassword" placeholder="konfirmasi password baru" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 transition transition-duration-200">
+                        </div>
+
+                        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition">
+                            Ubah Password
+                        </button>
                     </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">Password Baru</label>
-                        <input type="password" placeholder="masukkan password baru" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">Konfirmasi Password Baru</label>
-                        <input type="password" placeholder="konfirmasi password baru" class="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                    </div>
-
-                    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition">
-                        Ubah Password
-                    </button>
                 </div>
-            </div>
+            </form>
         </div>
 
         <!-- SIDEBAR -->

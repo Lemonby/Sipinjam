@@ -34,5 +34,7 @@ $routes->get('/reservasi', 'Reservasi::index');
 $routes->get('/riwayat-denda', 'Denda::index');
 
 $routes->get('/pengaturan', 'Pengaturan::index');
+$routes->post('/pengaturan/update-profil', 'Pengaturan::updateProfile');
+$routes->post('/pengaturan/update-password', 'Pengaturan::updatePassword');
 
 $routes->setAutoRoute(false);

@@ -93,7 +93,11 @@
                             <div class="w-full h-32 bg-gradient-to-br from-amber-700 to-yellow-900 rounded-lg mb-2 flex items-center justify-center group-hover:shadow-lg transition-shadow">
                                 <i class="bi bi-book text-white text-2xl"></i>
                             </div>
-                            <p class="text-xs font-medium text-green-600 bg-green-100 rounded-full px-2 py-1 inline-block mb-1"><?= $katalog['statusTersedia'] ?> Tersedia</p>
+                            <?php if ($katalog['statusTersedia'] > 0): ?>
+                                <p class="text-xs font-medium text-green-600 bg-green-100 rounded-full px-2 py-1 inline-block mb-1"><?= $katalog['statusTersedia'] ?> Tersedia</p>
+                            <?php else: ?>
+                                <p class="text-xs font-medium text-red-600 bg-red-100 rounded-full px-2 py-1 inline-block mb-1">Tidak Tersedia</p>
+                            <?php endif; ?>
                             <h4 class="font-semibold text-sm text-slate-800 truncate"><?= $katalog['judul'] ?></h4>
                             <p class="text-xs text-gray-600 truncate"><?= $katalog['penulis'] ?></p>
                         </div>

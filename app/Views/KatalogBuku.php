@@ -27,15 +27,15 @@
         </div>
 
         <!-- SEARCH & FILTER BAR -->
-        <div class="mb-8 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl border-2 border-blue-300">
+        <div class="mb-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="relative">
-                    <i class="bi bi-search absolute left-4 top-3.5 text-gray-400"></i>
-                    <input type="text" name="search" id="search" placeholder="Cari buku berdasarkan judul..." class="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300" />
+                <div class="relative group">
+                    <i class="bi bi-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors"></i>
+                    <input type="text" name="search" id="search" placeholder="Cari buku berdasarkan judul..." class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400 transition-all duration-200" />
                 </div>
-                <div class="relative">
-                    <i class="bi bi-funnel absolute left-4 top-3.5 text-gray-400"></i>
-                    <input type="text" name="filter" id="filter" placeholder="Filter berdasarkan penulis..." class="w-full pl-12 pr-4 py-3 rounded-xl border-2 border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 transition-all duration-300" />
+                <div class="relative group">
+                    <i class="bi bi-funnel absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors"></i>
+                    <input type="text" name="filter" id="filter" placeholder="Filter berdasarkan penulis..." class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400 transition-all duration-200" />
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
         <?php else: ?>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
                 <?php foreach ($books as $book): ?>
-                    <div class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:-translate-y-2">
+                    <div class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:scale-102 hover:-translate-y-2">
                         <!-- Cover Image -->
                         <div class="relative h-56 overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300">
                             <img src="<?= $book['cover'] ?>" alt="<?= $book['judul'] ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
