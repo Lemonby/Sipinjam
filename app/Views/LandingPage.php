@@ -7,45 +7,57 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <title>Perpustakaan Online</title>
 </head>
-<body class="bg-blue-50 py-4 px-8 rounded-lg">
+<body class="bg-blue-50 py-4 px-8">
+
+  <?php if (isset($user) && is_array($user)): ?>
+    <div class="max-w-7xl mx-auto mt-4 bg-white border border-blue-100 rounded-lg px-4 py-3 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <div class="text-sm text-slate-700">
+        Login sebagai <span class="font-semibold"><?= esc($user['nama']) ?></span> | NIM: <?= esc($user['nim']) ?> | <?= esc($user['jurusan']) ?>
+      </div>
+      <a href="<?= site_url('/logout') ?>" class="inline-flex items-center justify-center bg-red-500 hover:bg-red-600 text-white text-sm font-semibold px-4 py-2 rounded-md transition">Logout</a>
+    </div>
+  <?php endif; ?>
 
   <!-- section hero -->
-  <div class="bg-blue-500 text-white p-8 rounded-lg text-left max-w-7xl mx-auto mt-8">
-    <span class="font-medium text-sm bg-blue-100 rounded-2xl p-1 mb-2">khusus mahasiswa cerdas</span>
+  <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 rounded-3xl text-left max-w-7xl mx-auto mt-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+    <span class="inline-flex items-center gap-2 bg-white/20 text-white text-sm font-medium px-4 py-1 rounded-full">
+      <i class="bi bi-mortarboard-fill text-sm"></i>
+      khusus mahasiswa cerdas
+    </span>
     <h6 class="font-bold text-4xl max-w-lg capitalize mt-2 mb-8">Akses  Ribuan Pengetahuan dalam satu klik</h6>
     <p class="text-white text-medium max-w-150 mb-8">pinjam buku favoritmu secara online, ambil di perpustakaan tanpa antre, khusus mahasiswa cerdas, gratis dan murah!</p>
     <div class="flex gap-4">
-      <button class="bg-white hover:bg-blue-700 text-blue-500 font-bold py-2 px-4 rounded">Pinjam Sekarang</button>
-      <button class="bg-blue-500 hover:bg-blue-700 ring-2 text-white font-bold py-2 px-4 rounded">Lihat Detail</button>
+      <a href="<?= site_url('/login') ?>" class="inline-flex items-center bg-white hover:bg-blue-50 text-purple-600 font-bold py-2 px-4 rounded transition">Pinjam Sekarang</a>
+      <a href="<?= site_url('/login') ?>" class="inline-flex items-center bg-white/20 hover:bg-white/30 ring-2 ring-white text-white font-bold py-2 px-4 rounded transition">Lihat Detail</a>
     </div>
   </div>
 
   <!-- section card features -->
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-16 mt-8 max-w-7xl mx-auto">
-    <div class="bg-white p-2 rounded-lg shadow max-w-lg items-center text-center leading-8">
+    <div class="flex flex-col justify-center bg-white p-2 rounded-lg shadow max-w-lg items-center text-center leading-8">
       <div class="text-blue-500 text-2xl mt-4">
-      <i class="bi bi-journals bg-blue-100 p-3 rounded-full"></i>
+      <i class="w-14 h-14 flex items-center justify-center bi bi-journals bg-blue-100 p-3 rounded-full"></i>
       </div>
       <h6 class="text-2xl font-bold text-blue-500 mt-6 mb-1">5.000+</h6> 
       <p class="text-gray-500 text-medium">Koleksi Buku</p>
     </div>
-    <div class="bg-white p-2 rounded-lg shadow max-w-lg items-center text-center leading-8">
+    <div class="flex flex-col justify-center bg-white p-2 rounded-lg shadow max-w-lg items-center text-center leading-8">
       <div class="text-orange-500 text-2xl mt-4">
-        <i class="bi bi-stack bg-orange-100 p-3 rounded-full"></i>
+        <i class="w-14 h-14 flex items-center justify-center bi bi-stack bg-orange-100 p-3 rounded-full"></i>
       </div>
       <h6 class="text-2xl font-bold text-orange-500 mt-6 mb-1">20+</h6>
       <p class="text-gray-500 text-medium">Kategori Bidang</p>
     </div>
-    <div class="bg-white p-2  rounded-lg shadow max-w-lg items-center text-center leading-8">
+    <div class="flex flex-col justify-center bg-white p-2  rounded-lg shadow max-w-lg items-center text-center leading-8">
       <div class="text-green-500 text-2xl mt-4">
-        <i class="bi bi-people bg-green-100 p-3 rounded-full"></i>
+        <i class="w-14 h-14 flex items-center justify-center bi bi-people bg-green-100 p-3 rounded-full"></i>
       </div>
       <h6 class="text-2xl font-bold text-green-500 mt-6 mb-1">1.200</h6>
       <p class="text-gray-500 text-medium">Pengguna Aktif</p>
     </div>
-    <div class="bg-white p-2 rounded-lg shadow max-w-lg items-center text-center leading-8">
+    <div class="flex flex-col justify-center bg-white p-2 rounded-lg shadow max-w-lg items-center text-center leading-8">
       <div class="text-purple-500 text-2xl mt-4">
-        <i class="bi bi-clock bg-purple-100 p-3 rounded-full"></i>
+        <i class="w-14 h-14 flex items-center justify-center bi bi-clock bg-purple-100 p-3 rounded-full"></i>
       </div>
       <h6 class="text-2xl font-bold text-purple-500 mt-6 mb-1"> < 5 Menit</h6>
       <p class="text-gray-500 text-medium">Proses Cepat</p>
@@ -200,7 +212,7 @@
 
   <!-- footer -->
   <footer class="mt-16 overflow-hidden -mx-8 -mb-4">
-    <div class="bg-[#2f80e7] text-white px-6 py-12 md:px-12">
+    <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-12 md:px-12 shadow-lg">
       <div class="text-center max-w-3xl mx-auto">
         <span class="inline-flex items-center gap-2 bg-white/20 text-white text-sm font-medium px-4 py-1 rounded-full">
           <i class="bi bi-rocket-takeoff-fill text-xs"></i>
@@ -210,7 +222,7 @@
         <p class="text-blue-100 mt-4 leading-relaxed">Daftar sekarang untuk mendapatkan kartu anggota digital dan mulai pinjam buku pertamamu hari ini! Gratis untuk semua mahasiswa IT.</p>
 
         <div class="mt-8 flex flex-col sm:flex-row justify-center gap-3">
-          <button class="bg-white text-[#2f80e7] font-semibold px-6 py-3 rounded-md hover:bg-blue-50 transition">Daftar Jadi Anggota Sekarang <i class="bi bi-arrow-right"></i></button>
+          <button class="bg-white text-purple-600 font-semibold px-6 py-3 rounded-md hover:bg-blue-50 transition">Daftar Jadi Anggota Sekarang <i class="bi bi-arrow-right"></i></button>
           <button class="border border-white text-white font-semibold px-6 py-3 rounded-md hover:bg-white/10 transition"><i class="bi bi-question-circle mr-1"></i> Pelajari Lebih Lanjut</button>
         </div>
       </div>

@@ -60,6 +60,10 @@ writable/session/*
 writable/uploads/*
 !writable/uploads/index.html
 
+# If you have a public uploads directory, you may want to ignore it as well.
+public/uploads/*
+!public/uploads/index.html
+
 writable/debugbar/*
 !writable/debugbar/index.html
 
@@ -85,6 +89,11 @@ phpunit
 # Composer
 #-------------------------
 vendor/
+
+#-------------------------
+# Node Modules
+#-------------------------
+node_modules/
 
 #-------------------------
 # IDE / Development Files
