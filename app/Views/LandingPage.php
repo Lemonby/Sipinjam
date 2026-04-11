@@ -27,8 +27,8 @@
     <h6 class="font-bold text-4xl max-w-lg capitalize mt-2 mb-8">Akses  Ribuan Pengetahuan dalam satu klik</h6>
     <p class="text-white text-medium max-w-150 mb-8">pinjam buku favoritmu secara online, ambil di perpustakaan tanpa antre, khusus mahasiswa cerdas, gratis dan murah!</p>
     <div class="flex gap-4">
-      <a href="<?= site_url('/login') ?>" class="inline-flex items-center bg-white hover:bg-blue-50 text-purple-600 font-bold py-2 px-4 rounded transition">Pinjam Sekarang</a>
-      <a href="<?= site_url('/login') ?>" class="inline-flex items-center bg-white/20 hover:bg-white/30 ring-2 ring-white text-white font-bold py-2 px-4 rounded transition">Lihat Detail</a>
+      <a href="<?= base_url('/login') ?>" class="inline-flex items-center bg-white hover:bg-blue-50 text-purple-600 font-bold py-2 px-4 rounded transition">Pinjam Sekarang</a>
+      <a href="<?= base_url('/login') ?>" class="inline-flex items-center bg-white/20 hover:bg-white/30 ring-2 ring-white text-white font-bold py-2 px-4 rounded transition">Lihat Detail</a>
     </div>
   </div>
 

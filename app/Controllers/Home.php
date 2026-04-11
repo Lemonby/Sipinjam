@@ -6,6 +6,9 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        return view('LandingPage');
+        $user = session()->get('mahasiswa');
+        return view('LandingPage', [
+            'user' => $user,
+        ]);
     }
 }

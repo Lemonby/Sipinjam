@@ -26,6 +26,10 @@ class BooksModel extends Model
     // fungsi untuk mendapatkan detail buku berdasarkan id
     public function getBookById($id)
     {
-        return $this->select('books.*')->where('id', $id)->first();
+        return $this->select('books.*, SUM(CASE WHEN bookCopies.status = "tersedia" THEN 1 ELSE 0 END) as statusTersedia')
+            ->join('bookCopies', 'bookCopies.idBuku = books.id', 'left')
+            ->groupBy('books.id')
+            ->where('books.id', $id)
+            ->first();
     }
 }

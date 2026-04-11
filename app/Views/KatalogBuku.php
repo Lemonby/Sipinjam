@@ -31,11 +31,11 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="relative group">
                     <i class="bi bi-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors"></i>
-                    <input type="text" name="search" id="search" placeholder="Cari buku berdasarkan judul..." class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400 transition-all duration-200" />
+                    <input type="text" name="search" id="searchInput" placeholder="Cari buku berdasarkan judul..." class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400 transition-all duration-200" />
                 </div>
                 <div class="relative group">
                     <i class="bi bi-funnel absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-blue-500 transition-colors"></i>
-                    <input type="text" name="filter" id="filter" placeholder="Filter berdasarkan penulis..." class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400 transition-all duration-200" />
+                    <input type="text" name="filter" id="filterInput" placeholder="Filter berdasarkan penulis..." class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-200 bg-white text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400 transition-all duration-200" />
                 </div>
             </div>
         </div>
@@ -50,10 +50,10 @@
         <?php else: ?>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
                 <?php foreach ($books as $book): ?>
-                    <div class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:scale-102 hover:-translate-y-2">
+                    <div class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 hover:scale-102 hover:-translate-y-2" data-book-title="<?= strtolower($book['judul']) ?>" data-book-author="<?= strtolower($book['penulis']) ?>">
                         <!-- Cover Image -->
                         <div class="relative h-56 overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300">
-                            <img src="<?= $book['cover'] ?>" alt="<?= $book['judul'] ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="<?= base_url('assets/images/' . $book['cover']) ?>" alt="<?= $book['judul'] ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                         </div>
 
                         <!-- Book Info -->
@@ -86,17 +86,10 @@
 
                             <!-- Button -->
                             <div class="pt-3 border-t-2 border-gray-100">
-                                <?php if ($book['statusTersedia'] > 0): ?>
-                                    <a href="<?= base_url('/peminjaman/' . $book['id']) ?>" class="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-2.5 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg group/btn">
-                                        <i class="bi bi-bag-check-fill group-hover/btn:scale-110 transition-transform"></i>
-                                        <span>Pinjam</span>
-                                    </a>
-                                <?php else: ?>
-                                    <button disabled class="flex items-center justify-center gap-2 w-full bg-gray-300 text-gray-600 font-bold py-2.5 rounded-lg cursor-not-allowed opacity-60">
-                                        <i class="bi bi-lock-fill"></i>
-                                        <span>Tidak Tersedia</span>
-                                    </button>
-                                <?php endif; ?>
+                                <a href="<?= base_url('/peminjaman/' . $book['id']) ?>" class="flex items-center justify-center gap-2 w-full <?= $book['statusTersedia'] > 0 ? 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700' : 'bg-red-500 hover:bg-red-600' ?> text-white font-bold py-2.5 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg group/btn">
+                                    <i class="bi <?= $book['statusTersedia'] > 0 ? 'bi-bag-check-fill' : 'bi-calendar-check' ?> group-hover/btn:scale-110 transition-transform"></i>
+                                    <span><?= $book['statusTersedia'] > 0 ? 'Pinjam' : 'Tidak Tersedia' ?></span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -112,6 +105,125 @@
                     </p>
                 </div>
             </div>
+
+            <!-- Search & Filter JavaScript -->
+            <script>
+                const searchInput = document.getElementById('searchInput');
+                const filterInput = document.getElementById('filterInput');
+                const bookGrid = document.querySelector('.grid');
+                const bookCards = document.querySelectorAll('[data-book-title]');
+                
+                // Add CSS for smooth transitions
+                const style = document.createElement('style');
+                style.textContent = `
+                    [data-book-title] {
+                        opacity: 1;
+                        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                        transform: scale(1);
+                    }
+                    [data-book-title][data-hidden="true"] {
+                        opacity: 0;
+                        transform: scale(0.95);
+                        pointer-events: none;
+                        position: absolute;
+                        visibility: hidden;
+                    }
+                    .grid {
+                        transition: opacity 0.3s ease-in-out;
+                    }
+                    .grid[data-empty="true"] {
+                        opacity: 0;
+                        visibility: hidden;
+                        height: 0;
+                    }
+                    [data-empty-state] {
+                        animation: fadeInUp 0.5s ease-out;
+                    }
+                    @keyframes fadeInUp {
+                        from {
+                            opacity: 0;
+                            transform: translateY(20px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                // Store original books data
+                const books = Array.from(document.querySelectorAll('[data-book-title]')).map(card => ({
+                    element: card,
+                    title: card.getAttribute('data-book-title').toLowerCase(),
+                    author: card.getAttribute('data-book-author').toLowerCase()
+                }));
+
+                function filterBooks() {
+                    const searchTerm = searchInput.value.toLowerCase();
+                    const filterTerm = filterInput.value.toLowerCase();
+                    let visibleCount = 0;
+
+                    books.forEach((book, index) => {
+                        const matchesSearch = searchTerm === '' || book.title.includes(searchTerm);
+                        const matchesFilter = filterTerm === '' || book.author.includes(filterTerm);
+                        const shouldShow = matchesSearch && matchesFilter;
+
+                        if (shouldShow) {
+                            book.element.setAttribute('data-hidden', 'false');
+                            book.element.style.animationDelay = `${index * 0.05}s`;
+                            visibleCount++;
+                        } else {
+                            book.element.setAttribute('data-hidden', 'true');
+                        }
+                    });
+
+                    // Show/hide empty state with smooth animation
+                    const emptyState = document.querySelector('[data-empty-state]');
+                    if (visibleCount === 0) {
+                        if (!emptyState) {
+                            const noResults = document.createElement('div');
+                            noResults.className = 'text-center py-16';
+                            noResults.setAttribute('data-empty-state', 'true');
+                            noResults.innerHTML = `
+                                <i class="bi bi-search text-6xl text-gray-300 block mb-4"></i>
+                                <h3 class="text-2xl font-semibold text-gray-500 mb-2">Tidak Ada Hasil</h3>
+                                <p class="text-gray-400">Buku yang kamu cari tidak ditemukan. Coba gunakan kata kunci lain.</p>
+                            `;
+                            bookGrid.parentNode.insertBefore(noResults, bookGrid);
+                        }
+                        bookGrid.setAttribute('data-empty', 'true');
+                    } else {
+                        if (emptyState) {
+                            emptyState.style.animation = 'none';
+                            setTimeout(() => emptyState.remove(), 100);
+                        }
+                        bookGrid.setAttribute('data-empty', 'false');
+                    }
+                }
+
+                // Event listeners with debounce and smooth transitions
+                let searchTimeout;
+                searchInput.addEventListener('input', () => {
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(filterBooks, 250);
+                });
+
+                filterInput.addEventListener('input', () => {
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(filterBooks, 250);
+                });
+
+                // Clear search when clicking X
+                searchInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        searchInput.value = '';
+                        filterInput.value = '';
+                        searchInput.focus();
+                        filterBooks();
+                    }
+                });
+            </script>
         <?php endif; ?>
     </div>
 </div>

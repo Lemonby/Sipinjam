@@ -56,7 +56,7 @@
                             <!-- Cover -->
                             <div class="flex-shrink-0">
                                 <div class="w-24 h-36 rounded-xl overflow-hidden shadow-md group-hover:shadow-lg transition-shadow">
-                                    <img src="<?= $p['coverBuku'] ?>" alt="<?= $p['judulBuku'] ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                                    <img src="<?= base_url('assets/images/' . $p['coverBuku']) ?>" alt="<?= $p['judulBuku'] ?>" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                                 </div>
                             </div>
 

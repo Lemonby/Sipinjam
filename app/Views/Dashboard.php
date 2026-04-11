@@ -49,21 +49,25 @@
                 <?php else: ?>
                     <!-- Card Buku Aktif -->
                     <?php foreach ($dataUser as $buku): ?>
-                        <div class="flex gap-4 pb-4 border-b border-gray-200 mb-4">
-                            <div class="w-20 h-28 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center text-white text-xs font-bold">
-                                <?= substr($buku['judulBuku'], 0, 10) ?>...
+                        <div class="flex gap-4 pb-4 border-b border-gray-200 mb-4 group hover:bg-gray-50 p-2 rounded-lg transition-all duration-300">
+                            <div class="w-20 h-28 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center text-white text-xs font-bold flex-shrink-0 shadow-md overflow-hidden">
+                                <img src="<?= base_url('assets/images/' . $buku['coverBuku']) ?>" alt="Cover Buku" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1">
                                 <h3 class="font-semibold text-lg text-slate-800"><?= $buku['judulBuku'] ?></h3>
                                 <p class="text-sm text-gray-600"><?= $buku['penulisBuku'] ?></p>
                                 <div class="flex items-center gap-2 mt-2 text-orange-500">
                                     <i class="bi bi-hourglass-split text-sm"></i>
-                                    <span class="text-sm"><?= $buku['sisaHari'] ?> Hari Lagi</span>
+                                    <span class="text-sm font-medium"><?= $buku['sisaHari'] ?> Hari Lagi</span>
                                 </div>
-                                <div class="flex items-center mt-1">
-                                    <a href="<?= base_url('/peminjaman/perpanjang/' . $buku['idBookCopy']) ?>" class="focus:outline-none gap-2 px-2 py-1.5 w-auto border-2 bg-blue-50 border-blue-500 text-blue-600 hover:bg-blue-500 hover:text-white rounded-lg text-sm font-semibold transition">
+                                <div class="flex items-center mt-3 gap-2">
+                                    <a href="<?= base_url('/peminjaman/perpanjang/' . $buku['idBookCopy']) ?>" class="focus:outline-none gap-2 px-3 py-1.5 bg-blue-50 border-2 border-blue-500 text-blue-600 hover:bg-blue-500 hover:text-white rounded-lg text-sm font-semibold transition-all duration-300 flex items-center">
                                         <i class="bi bi-arrow-repeat text-sm"></i>
                                         <span>Perpanjang</span>
+                                    </a>
+                                    <a href="<?= base_url('/peminjaman/kembalikan/' . $buku['idBookCopy']) ?>" class="focus:outline-none gap-2 px-3 py-1.5 bg-green-50 border-2 border-green-500 text-green-600 hover:bg-green-500 hover:text-white rounded-lg text-sm font-semibold transition-all duration-300 flex items-center">
+                                        <i class="bi bi-check-circle text-sm"></i>
+                                        <span>Kembalikan</span>
                                     </a>
                                 </div>
                             </div>
@@ -89,18 +93,18 @@
                 <!-- Horizontal Scrollable Container -->
                 <div id="booksScroller" class="flex gap-4 overflow-x-auto pb-2 scroll-smooth" style="scroll-behavior: smooth;">
                     <?php foreach($dataKatalog as $katalog): ?> 
-                        <div class="flex-shrink-0 w-60 text-left group cursor-move">
-                            <div class="w-full h-32 bg-gradient-to-br from-amber-700 to-yellow-900 rounded-lg mb-2 flex items-center justify-center group-hover:shadow-lg transition-shadow">
-                                <i class="bi bi-book text-white text-2xl"></i>
+                        <a href="<?= base_url('/peminjaman/' . $katalog['id']) ?>" class="flex-shrink-0 w-44 text-left group cursor-pointer hover:scale-105 transition-transform duration-300">
+                            <div class="w-full h-56 bg-gradient-to-br from-amber-700 to-yellow-900 rounded-xl mb-3 flex items-center justify-center group-hover:shadow-xl transition-all duration-300 overflow-hidden shadow-md">
+                                <img src="<?= base_url('assets/images/' . $katalog['cover']) ?>" alt="<?= $katalog['judul'] ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                             </div>
                             <?php if ($katalog['statusTersedia'] > 0): ?>
-                                <p class="text-xs font-medium text-green-600 bg-green-100 rounded-full px-2 py-1 inline-block mb-1"><?= $katalog['statusTersedia'] ?> Tersedia</p>
+                                <p class="text-xs font-semibold text-green-600 bg-green-100 rounded-full px-2.5 py-1 inline-block mb-2"><?= $katalog['statusTersedia'] ?> Tersedia</p>
                             <?php else: ?>
-                                <p class="text-xs font-medium text-red-600 bg-red-100 rounded-full px-2 py-1 inline-block mb-1">Tidak Tersedia</p>
+                                <p class="text-xs font-semibold text-red-600 bg-red-100 rounded-full px-2.5 py-1 inline-block mb-2">Tidak Tersedia</p>
                             <?php endif; ?>
-                            <h4 class="font-semibold text-sm text-slate-800 truncate"><?= $katalog['judul'] ?></h4>
-                            <p class="text-xs text-gray-600 truncate"><?= $katalog['penulis'] ?></p>
-                        </div>
+                            <h4 class="font-bold text-sm text-slate-800 truncate group-hover:text-blue-600 transition-colors"><?= $katalog['judul'] ?></h4>
+                            <p class="text-xs text-gray-600 truncate group-hover:text-gray-700"><?= $katalog['penulis'] ?></p>
+                        </a>
                     <?php endforeach; ?>
                 </div>
             </div>

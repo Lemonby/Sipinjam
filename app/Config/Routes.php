@@ -29,9 +29,12 @@ $routes->get('/peminjamanku', 'PeminjamanKu::index');
 
 // Boking buku
 $routes->get('/reservasi', 'Reservasi::index');
+$routes->get('/reservasi/reserve/(:num)', 'Reservasi::reserve/$1');
+$routes->post('/reservasi/cancel/(:num)', 'Reservasi::cancel/$1');
 
 // Riwayat denda
 $routes->get('/riwayat-denda', 'Denda::index');
+$routes->post('/denda/pay-with-proof/(:num)', 'Denda::payWithProof/$1');
 
 $routes->get('/pengaturan', 'Pengaturan::index');
 $routes->post('/pengaturan/update-profil', 'Pengaturan::updateProfile');

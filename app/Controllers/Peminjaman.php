@@ -11,7 +11,14 @@ class Peminjaman extends BaseController
         }
 
         $booksModel = new \App\Models\BooksModel();
-        $book = $booksModel->getBookById($id);
+        $reservationModel = new \App\Models\ReservationModel();
+        
+        // Get book dengan statusTersedia
+        $book = $booksModel->select('books.*, SUM(CASE WHEN bookCopies.status = "tersedia" THEN 1 ELSE 0 END) as statusTersedia')
+            ->join('bookCopies', 'bookCopies.idBuku = books.id', 'left')
+            ->where('books.id', $id)
+            ->groupBy('books.id')
+            ->first();
         
         // Jika buku tidak ditemukan
         if (!$book) {
@@ -20,12 +27,19 @@ class Peminjaman extends BaseController
 
         $tanggal_mulai = date('Y-m-d');
         $tanggal_kembali = date('Y-m-d', strtotime('+7 days')); // Default 7 hari
+        
+        // Hitung nomor antrian jika buku tidak tersedia
+        $nomorAntrian = 0;
+        if ($book['statusTersedia'] <= 0) {
+            $nomorAntrian = $reservationModel->getQueuePosition($id);
+        }
 
         return view('PeminjamanDetail', [
             'user' => session()->get('mahasiswa'),
             'buku' => $book,
             'tanggal_mulai' => $tanggal_mulai,
             'tanggal_kembali' => $tanggal_kembali,
+            'nomorAntrian' => $nomorAntrian,
         ]);
     }
 

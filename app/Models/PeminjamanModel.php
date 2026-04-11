@@ -23,6 +23,7 @@ class PeminjamanModel extends Model
     {
         return $this->where('idBookCopy', $idBookCopy)
                     ->where('idUser', $userId)
+                    ->where('status', 'dipinjam')
                     ->first();
     }
 
